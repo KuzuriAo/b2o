@@ -1,8 +1,9 @@
 import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { computeOutputPath, matchWarningLine, payloadFilePath, shouldSkipExisting } from "./convert.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { ConvertOptions } from "./convert.js";
+import { computeOutputPath, createWatchState, matchWarningLine, payloadFilePath, shouldSkipExisting, watchPollOnce } from "./convert.js";
 
 describe("computeOutputPath", () => {
   it("appends the default _U1 suffix, alongside the input by default", () => {
@@ -87,5 +88,75 @@ describe("shouldSkipExisting", () => {
 
   it("is false when --skip-existing was passed but there's nothing to skip yet", () => {
     expect(shouldSkipExisting(missingPath, true)).toBe(false);
+  });
+});
+
+describe("watchPollOnce", () => {
+  let tempDir: string;
+  let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
+
+  const options: ConvertOptions = { suffix: "_U1", dryRun: true, verbose: false, skipExisting: false, baseUrl: "http://example.invalid" };
+
+  beforeEach(() => {
+    tempDir = mkdtempSync(join(tmpdir(), "b2o-watch-test-"));
+    // Every file below is plain text, not a real .3mf -- runConvert will fail to parse it and
+    // log via console.error. That's fine here: these tests only care whether an attempt was
+    // made (and exactly once), not whether the conversion itself succeeded.
+    consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    rmSync(tempDir, { recursive: true, force: true });
+    consoleErrorSpy.mockRestore();
+  });
+
+  it("ignores files that aren't .3mf or .zip", async () => {
+    writeFileSync(join(tempDir, "readme.txt"), "hello");
+    const state = createWatchState();
+    await watchPollOnce(tempDir, options, state);
+    await watchPollOnce(tempDir, options, state);
+    expect(state.done.size).toBe(0);
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
+  });
+
+  it("waits for a file's size to settle across two polls before attempting it", async () => {
+    const filePath = join(tempDir, "model.3mf");
+    writeFileSync(filePath, "partial");
+    const state = createWatchState();
+
+    await watchPollOnce(tempDir, options, state); // first sighting -- not stable yet
+    expect(state.done.has("model.3mf")).toBe(false);
+
+    await watchPollOnce(tempDir, options, state); // unchanged since the last poll -- now stable
+    expect(state.done.has("model.3mf")).toBe(true);
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it("resets the stability count if the file grows between polls (still being written)", async () => {
+    const filePath = join(tempDir, "model.3mf");
+    writeFileSync(filePath, "a");
+    const state = createWatchState();
+
+    await watchPollOnce(tempDir, options, state); // sees size 1
+    writeFileSync(filePath, "aa"); // grew -- still being written
+    await watchPollOnce(tempDir, options, state); // size changed (1 -> 2) -- still not stable
+    expect(state.done.has("model.3mf")).toBe(false);
+
+    await watchPollOnce(tempDir, options, state); // unchanged (2 -> 2) -- now stable
+    expect(state.done.has("model.3mf")).toBe(true);
+  });
+
+  it("never re-attempts a file it already processed, even if its size changes later", async () => {
+    const filePath = join(tempDir, "model.3mf");
+    writeFileSync(filePath, "aaaa");
+    const state = createWatchState();
+    await watchPollOnce(tempDir, options, state);
+    await watchPollOnce(tempDir, options, state); // now done, one attempt logged
+    expect(state.done.has("model.3mf")).toBe(true);
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+
+    writeFileSync(filePath, "bbbbbbbb"); // size changed -- shouldn't matter, already done
+    await watchPollOnce(tempDir, options, state);
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1); // still just the one attempt
   });
 });

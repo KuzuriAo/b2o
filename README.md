@@ -38,6 +38,7 @@ Converts one or more local `.3mf` files. A file that's actually a zip bundling s
 | `--out-dir <dir>` | Write outputs to this directory instead of alongside each input |
 | `--suffix <text>` | Output filename suffix, default `_U1` (pass `""` to remove it — refused if that would overwrite the input) |
 | `--skip-existing` | Skip a file entirely (no network call) if its output already exists — for resuming an interrupted batch. Off by default: a normal run always overwrites, same as re-running a build |
+| `--watch` | Watch `<files...>` (must be exactly one existing folder) for new `.3mf`/`.zip` files and convert each as it appears, running until Ctrl+C. Requires `--out-dir` pointing somewhere other than the watched folder — otherwise a freshly written output would get picked up as a "new" input on the next poll |
 | `--dry-run` | Parse and preview exactly what would be sent, with **zero** network calls or quota spent |
 | `--verbose` | Show what's being sent immediately before a real conversion, plus the server's actual profile match afterward |
 | `--api-base <url>` | Override the API base URL |
@@ -49,6 +50,7 @@ Both `--dry-run` and `--verbose` write the complete request payload — every se
 ```bash
 b2o convert model.3mf --dry-run
 b2o convert *.3mf --profile snapmaker-u1-0.4-standard --out-dir ./converted
+b2o convert ./exports --watch --out-dir ./converted   # convert new files as they appear, until Ctrl+C
 ```
 
 ### `b2o profiles [--nozzle <mm>]`

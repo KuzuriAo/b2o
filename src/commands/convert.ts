@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, extname, join, resolve } from "node:path";
 import { applyConvertResponse, prepareConvertRequest, unwrapIfBundle } from "../internal/engine-client/index.js";
 import type { ConvertRequest, ConvertResponse } from "../internal/shared/index.js";
@@ -223,5 +223,81 @@ export async function runConvert(inputPaths: string[], options: ConvertOptions):
     } else {
       await convertOne(basename(inputPath), bytes, defaultDir, inputPath, options, apiKey);
     }
+  }
+}
+
+const WATCH_POLL_INTERVAL_MS = 2000;
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((res) => setTimeout(res, ms));
+}
+
+function isConvertibleFile(name: string): boolean {
+  const ext = extname(name).toLowerCase();
+  return ext === ".3mf" || ext === ".zip";
+}
+
+/** Per-file state a watch session tracks across polls -- exported only so tests can drive {@link watchPollOnce} deterministically, without any real timers. */
+export interface WatchState {
+  lastSize: Map<string, number>;
+  done: Set<string>;
+}
+
+export function createWatchState(): WatchState {
+  return { lastSize: new Map(), done: new Set() };
+}
+
+/**
+ * Runs exactly one poll pass over `folder`, converting any file whose size
+ * has just settled (unchanged from the previous poll) and hasn't already
+ * been processed. Split out from {@link runWatch} purely so it can be
+ * driven directly, poll by poll, in tests -- the real CLI path only ever
+ * calls it from the infinite loop below.
+ *
+ * A file is only converted once its size is unchanged across two
+ * consecutive polls -- guards against reading a file mid-copy/mid-download
+ * (a partial zip fails to parse, which without this would either error out
+ * permanently or, worse, silently succeed on truncated data).
+ */
+export async function watchPollOnce(folder: string, options: ConvertOptions, state: WatchState): Promise<void> {
+  const entries = readdirSync(folder).filter(isConvertibleFile);
+  for (const name of entries) {
+    if (state.done.has(name)) continue;
+
+    let size: number;
+    try {
+      size = statSync(join(folder, name)).size;
+    } catch {
+      continue; // vanished between readdir and stat -- reconsider next poll
+    }
+
+    const previousSize = state.lastSize.get(name);
+    state.lastSize.set(name, size);
+    if (previousSize !== size) continue; // still being written (or just appeared) -- wait for the next poll to confirm it settled
+
+    state.done.add(name);
+    try {
+      await runConvert([join(folder, name)], options);
+    } catch (err) {
+      console.error(`Error converting ${name}: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+}
+
+/**
+ * Watches `folder` for new .3mf/.zip files and converts each one as it
+ * appears, running until interrupted (Ctrl+C) -- for a folder a slicer,
+ * export pipeline, or download manager writes new files into over time,
+ * rather than a fixed batch known up front. The caller (cli.ts) requires
+ * --out-dir to point somewhere other than `folder` before calling this --
+ * without that, a freshly written output would itself get picked up as a
+ * "new" input on the next poll, converting its own output forever.
+ */
+export async function runWatch(folder: string, options: ConvertOptions): Promise<void> {
+  const state = createWatchState();
+  console.log(`Watching ${folder} for new .3mf/.zip files (Ctrl+C to stop)...`);
+  for (;;) {
+    await watchPollOnce(folder, options, state);
+    await sleep(WATCH_POLL_INTERVAL_MS);
   }
 }

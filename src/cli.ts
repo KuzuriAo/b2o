@@ -3,8 +3,10 @@
 // also survive tsc's declaration-only pass output unpredictably and, if
 // ever bundled twice, produce two stacked shebang lines (invalid JS
 // syntax past the first line).
+import { existsSync, statSync } from "node:fs";
+import { resolve } from "node:path";
 import { parseArgs } from "node:util";
-import { runConvert } from "./commands/convert.js";
+import { runConvert, runWatch, type ConvertOptions } from "./commands/convert.js";
 import { runKeySet, runKeyShow } from "./commands/key.js";
 import { runLogin } from "./commands/login.js";
 import { runProfiles } from "./commands/profiles.js";
@@ -104,7 +106,7 @@ default profile -- without spending any of your API quota, since
 --dry-run never calls the real (rate-limited) conversion endpoint.
 
 Arguments:
-${formatOptions([["<files...>", "One or more .3mf or bundle .zip files (required)"]])}
+${formatOptions([["<files...>", "One or more .3mf or bundle .zip files (required) -- or, with --watch, exactly one existing folder"]])}
 
 Options:
 ${formatOptions([
@@ -113,6 +115,7 @@ ${formatOptions([
   ["--out-dir <dir>", "Write outputs to this directory instead of alongside each input"],
   ["--suffix <text>", 'Output filename suffix (default: "_U1"; pass "" to remove it -- refused if that would make the output path identical to the input file)'],
   ["--skip-existing", "Skip a file entirely (no network call) if its output already exists -- for resuming an interrupted batch. Off by default: a normal run always overwrites, same as re-running a build"],
+  ["--watch", 'Watch <files...> (must be exactly one existing folder) for new .3mf/.zip files and convert each as it appears, running until Ctrl+C. Requires --out-dir pointing somewhere other than the watched folder'],
   ["--dry-run", "Parse and show exactly what would be sent, without any network call or output file"],
   ["--verbose", "Show what's being sent immediately before a real conversion"],
   ["--api-base <url>", `Override the API base URL (default: ${DEFAULT_BASE_URL})`],
@@ -124,6 +127,15 @@ settings key, not just a count) to a "<name>.b2o-payload.json" file next
 to the output, since a real settings file easily has several hundred
 keys -- too many to usefully print inline on every run, but one \`cat\`/
 \`jq\` away for anyone who wants the full picture.
+
+For an export pipeline or download folder that gets new files over time
+rather than a fixed batch, --watch keeps running and converts each new
+file as it appears (Ctrl+C to stop):
+  b2o convert ./exports --watch --out-dir ./converted
+--out-dir is required with --watch, and must be a different folder than
+the one being watched -- otherwise a freshly written output would get
+picked up as a "new" input on the next poll, converting its own output
+forever.
 
 Don't want to take even that file on faith? Set HTTPS_PROXY to a local
 mitmproxy instance and watch the actual decrypted HTTPS traffic:
@@ -210,6 +222,7 @@ async function main(): Promise<void> {
           "dry-run": { type: "boolean", default: false },
           verbose: { type: "boolean", default: false },
           "skip-existing": { type: "boolean", default: false },
+          watch: { type: "boolean", default: false },
           "api-base": { type: "string", default: DEFAULT_BASE_URL },
         },
       });
@@ -218,7 +231,7 @@ async function main(): Promise<void> {
       if (filamentCompliance !== undefined && filamentCompliance !== "generic" && filamentCompliance !== "snapmaker") {
         throw new Error(`--filament-compliance must be "generic" or "snapmaker", got "${filamentCompliance}" (see: b2o convert --help)`);
       }
-      await runConvert(positionals, {
+      const convertOptions: ConvertOptions = {
         profile: values.profile,
         filamentCompliance,
         outDir: values["out-dir"],
@@ -227,7 +240,25 @@ async function main(): Promise<void> {
         verbose: Boolean(values.verbose),
         skipExisting: Boolean(values["skip-existing"]),
         baseUrl: values["api-base"] ?? DEFAULT_BASE_URL,
-      });
+      };
+
+      if (values.watch) {
+        if (positionals.length !== 1) throw new Error("--watch takes exactly one folder, not multiple paths (see: b2o convert --help)");
+        const [folder] = positionals;
+        if (!existsSync(folder) || !statSync(folder).isDirectory()) {
+          throw new Error(`--watch requires an existing folder, got "${folder}" (see: b2o convert --help)`);
+        }
+        if (!convertOptions.outDir) {
+          throw new Error("--watch requires --out-dir pointing somewhere other than the watched folder (see: b2o convert --help)");
+        }
+        if (resolve(convertOptions.outDir) === resolve(folder)) {
+          throw new Error("--out-dir must be a different folder than the one being watched with --watch (see: b2o convert --help)");
+        }
+        await runWatch(folder, convertOptions);
+        return;
+      }
+
+      await runConvert(positionals, convertOptions);
       return;
     }
 
