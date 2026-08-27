@@ -39,11 +39,14 @@ Converts one or more local `.3mf` files. A file that's actually a zip bundling s
 | `--suffix <text>` | Output filename suffix, default `_U1` (pass `""` to remove it — refused if that would overwrite the input) |
 | `--skip-existing` | Skip a file entirely (no network call) if its output already exists — for resuming an interrupted batch. Off by default: a normal run always overwrites, same as re-running a build |
 | `--watch` | Watch `<files...>` (must be exactly one existing folder) for new `.3mf`/`.zip` files and convert each as it appears, running until Ctrl+C. Requires `--out-dir` pointing somewhere other than the watched folder — otherwise a freshly written output would get picked up as a "new" input on the next poll |
+| `--archive-dir <dir>` | After a file fully converts, move the original there (collision-safe, atomic where possible). The cleanest way to keep a watched/cron-processed folder from ever needing to be rescanned |
+| `--log-file <path>` | Append every log/error line (timestamped) to this file, in addition to stdout/stderr |
+| `--quiet` | Suppress stdout/stderr entirely. Requires `--log-file` — refused otherwise, so an error never has nowhere to go |
 | `--dry-run` | Parse and preview exactly what would be sent, with **zero** network calls or quota spent |
 | `--verbose` | Show what's being sent immediately before a real conversion, plus the server's actual profile match afterward |
 | `--api-base <url>` | Override the API base URL |
 
-For a batch of several files, run with `--dry-run` first — it previews which profile each file will auto-match to (and clearly warns if a file can't be matched at all and would fall back to the default profile) without spending any quota, since `--dry-run` never calls the real rate-limited endpoint.
+For a batch of several files, run with `--dry-run` first — it previews which profile each file will auto-match to (and clearly warns if a file can't be matched at all and would fall back to the default profile) without spending any quota, since `--dry-run` never calls the real rate-limited endpoint. One bad file (or one bad entry inside a bundle) never aborts the rest of a batch — each is handled independently.
 
 Both `--dry-run` and `--verbose` write the complete request payload — every settings key, not just a count — to a `<name>.b2o-payload.json` file next to the output, since a real settings file easily has several hundred keys, too many to usefully print inline. That file is the actual, checkable proof behind the zero-mesh-upload claim.
 
@@ -52,6 +55,18 @@ b2o convert model.3mf --dry-run
 b2o convert *.3mf --profile snapmaker-u1-0.4-standard --out-dir ./converted
 b2o convert ./exports --watch --out-dir ./converted   # convert new files as they appear, until Ctrl+C
 ```
+
+#### Processing a folder repeatedly (`--watch` or cron)
+
+`--watch` isn't the only way to process a folder over time — everything below works identically from a plain (non-watch) `convert` call too, e.g. one triggered periodically by cron:
+
+```bash
+*/5 * * * *  b2o convert ./exports --archive-dir ./exports/done --out-dir ./converted --log-file ./b2o.log --quiet
+```
+
+Whenever `--watch`, `--archive-dir`, or `--skip-existing` is set (`--dry-run` is always exempt — it never has side effects to track), a small state file (`<out-dir or default dir>/.b2o-state.json`) records, per input, whether it fully succeeded or failed with a non-retryable error. It's keyed by name, size, **and modification time** together, so even a same-size content edit (e.g. fixing a typo in a plate name) is correctly seen as changed, not skipped. A non-retryable failure (a corrupt file, or the API rejecting the request itself) is skipped on future runs without retrying it forever; a transient one (the network being down, the server erroring, a rate limit) is always retried next time.
+
+`--archive-dir` is the cleaner option when your workflow allows it — once a file fully converts, the original moves out of the watched/cron-scanned folder entirely, so there's nothing left to ever rescan (no repeated unzipping of large bundles, no state file needed for it at all). Use the state-file fallback above (`--skip-existing`, or `--watch` on its own) instead when the folder needs to keep its original files in place.
 
 ### `b2o profiles [--nozzle <mm>]`
 

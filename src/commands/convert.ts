@@ -1,20 +1,27 @@
-import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, dirname, extname, join, resolve } from "node:path";
 import { applyConvertResponse, prepareConvertRequest, unwrapIfBundle } from "../internal/engine-client/index.js";
 import type { ConvertRequest, ConvertResponse } from "../internal/shared/index.js";
-import { convert as convertApi } from "../convertClient.js";
+import { archiveOriginal } from "../archiveMove.js";
+import { B2oApiError, convert as convertApi } from "../convertClient.js";
+import type { Logger } from "../logger.js";
 import { readConfig } from "../localConfig.js";
 import { previewProfileMatch, type ProfileMatchPreview } from "../profileMatchPreview.js";
+import { computeFingerprint, loadStateFile, saveStateFile, type StateFile } from "../watchState.js";
 
 export interface ConvertOptions {
   profile?: string;
   filamentCompliance?: "generic" | "snapmaker";
   outDir?: string;
+  archiveDir?: string;
   suffix: string;
   dryRun: boolean;
   verbose: boolean;
   skipExisting: boolean;
+  /** True when invoked under `b2o convert --watch`. Contributes to whether state-tracking is active (see {@link runConvert}) -- --watch has no other effect on this file's logic, it's purely a polling loop around runConvert (see {@link runWatch}). */
+  watch: boolean;
   baseUrl: string;
+  logger: Logger;
 }
 
 /**
@@ -25,9 +32,14 @@ export interface ConvertOptions {
  * it), and an optional `--out-dir` override.
  */
 export function computeOutputPath(entryName: string, defaultDir: string, suffix: string, outDir: string | undefined): string {
-  const dir = outDir ? resolve(outDir) : resolve(defaultDir);
+  const dir = resolveWorkDir(defaultDir, outDir);
   const base = basename(entryName, extname(entryName));
   return join(dir, `${base}${suffix}.3mf`);
+}
+
+/** Where outputs, payload sidecars, and the state file all resolve to -- `--out-dir` if set, otherwise alongside the input. */
+function resolveWorkDir(defaultDir: string, outDir: string | undefined): string {
+  return outDir ? resolve(outDir) : resolve(defaultDir);
 }
 
 /**
@@ -75,23 +87,23 @@ export function matchWarningLine(matchSource: ProfileMatchPreview["matchSource"]
 }
 
 /** --dry-run's local preview of auto-matching, computed without spending a real (rate-limited) conversion. */
-async function logMatchPreview(request: ConvertRequest, baseUrl: string): Promise<void> {
+async function logMatchPreview(request: ConvertRequest, baseUrl: string, logger: Logger): Promise<void> {
   const preview = await previewProfileMatch(request.projectSettings, baseUrl);
   const label = preview.profileId || "the server's default profile";
-  console.log(`    predicted profile match: ${label} (${preview.matchSource})`);
+  logger.log(`    predicted profile match: ${label} (${preview.matchSource})`);
   const line = matchWarningLine(preview.matchSource, label);
-  if (line) console.log(line);
+  if (line) logger.log(line);
 }
 
 /** A real run's authoritative match info, straight from the server's own response -- always shown when it's a fallback, only in --verbose otherwise. */
-function logActualMatch(response: ConvertResponse, verbose: boolean): void {
+function logActualMatch(response: ConvertResponse, verbose: boolean, logger: Logger): void {
   if (!response.profileMatch) return;
   const { profileId, matchSource } = response.profileMatch;
   const line = matchWarningLine(matchSource, profileId);
   if (line) {
-    console.log(line);
+    logger.log(line);
   } else if (verbose) {
-    console.log(`    matched profile: ${profileId} (${matchSource})`);
+    logger.log(`    matched profile: ${profileId} (${matchSource})`);
   }
 }
 
@@ -104,9 +116,9 @@ function logActualMatch(response: ConvertResponse, verbose: boolean): void {
  * unexpectedly-Generic filament is the kind of surprise a "quiet" run
  * shouldn't hide.
  */
-function logComplianceFallback(response: ConvertResponse): void {
+function logComplianceFallback(response: ConvertResponse, logger: Logger): void {
   if (!response.filamentComplianceFallback || response.filamentComplianceFallback.length === 0) return;
-  console.log(
+  logger.log(
     `    note: no branded Snapmaker preset exists for ${response.filamentComplianceFallback.join(", ")} -- fell back to Generic for ${
       response.filamentComplianceFallback.length === 1 ? "that material" : "those materials"
     }.`,
@@ -122,9 +134,41 @@ function logComplianceFallback(response: ConvertResponse): void {
  * not just asserted" bar the --dry-run/--verbose flags exist for at all.
  */
 export function payloadFilePath(entryName: string, defaultDir: string, outDir: string | undefined): string {
-  const dir = outDir ? resolve(outDir) : resolve(defaultDir);
+  const dir = resolveWorkDir(defaultDir, outDir);
   const base = basename(entryName, extname(entryName));
   return join(dir, `${base}.b2o-payload.json`);
+}
+
+/**
+ * Marks an error as having come from the network call specifically (as
+ * opposed to local parsing, path validation, or a filesystem write) --
+ * {@link isPermanentFailure} uses this to tell "this exact file will never
+ * convert" (a corrupt zip, a malformed request) apart from "this might
+ * work if tried again later" (the server was down, rate-limited, or
+ * unreachable). Everything that ISN'T tagged this way is treated as
+ * permanent by default, since it's deterministic given the same file and
+ * flags -- retrying won't change the outcome.
+ */
+class NetworkStageError extends Error {
+  constructor(public original: unknown) {
+    super(original instanceof Error ? original.message : String(original));
+    if (original instanceof Error && original.stack) this.stack = original.stack;
+  }
+}
+
+/**
+ * Whether retrying this exact file would plausibly produce a different
+ * result. A raw fetch failure (network down, DNS, timeout -- no response
+ * at all) or a 5xx/429 from the API is transient, worth retrying later.
+ * Any other error -- a parse failure, a validation error, or a 4xx from
+ * the API other than 429 -- means repeating the identical attempt won't
+ * help until something about the file or the request actually changes.
+ */
+export function isPermanentFailure(err: unknown): boolean {
+  const apiError = err instanceof NetworkStageError ? err.original : err;
+  if (apiError instanceof B2oApiError) return !(apiError.status >= 500 || apiError.status === 429);
+  if (err instanceof NetworkStageError) return false; // raw network failure (no response at all) -- transient
+  return true; // local error (parse, validation, etc.) -- deterministic given this exact file, not worth retrying
 }
 
 async function convertOne(
@@ -142,6 +186,7 @@ async function convertOne(
     ...(options.filamentCompliance ? { filamentComplianceMode: options.filamentCompliance } : {}),
   };
   const outPath = computeOutputPath(entryName, defaultDir, options.suffix, options.outDir);
+  const { logger } = options;
 
   if (resolve(outPath) === resolve(originalInputPath)) {
     throw new Error(
@@ -151,22 +196,22 @@ async function convertOne(
   }
 
   if (shouldSkipExisting(outPath, options.skipExisting)) {
-    console.log(`${options.dryRun ? "[dry-run] " : ""}${entryName}: skipped (already exists at ${outPath})`);
+    logger.log(`${options.dryRun ? "[dry-run] " : ""}${entryName}: skipped (already exists at ${outPath})`);
     return;
   }
 
   if (options.dryRun || options.verbose) {
     const payloadPath = payloadFilePath(entryName, defaultDir, options.outDir);
     writeFileSync(payloadPath, JSON.stringify(request, null, 2));
-    console.log(`${options.dryRun ? "[dry-run] " : ""}${entryName}`);
-    console.log(summarizePayload(request));
-    console.log(`    full request payload written to: ${payloadPath}`);
+    logger.log(`${options.dryRun ? "[dry-run] " : ""}${entryName}`);
+    logger.log(summarizePayload(request));
+    logger.log(`    full request payload written to: ${payloadPath}`);
     // Skipped when --profile forces a specific id -- there's no auto-match to preview.
-    if (!options.profile) await logMatchPreview(request, options.baseUrl);
+    if (!options.profile) await logMatchPreview(request, options.baseUrl, logger);
   }
 
   if (options.dryRun) {
-    console.log(`    would write: ${outPath}`);
+    logger.log(`    would write: ${outPath}`);
     return;
   }
 
@@ -177,12 +222,22 @@ async function convertOne(
     throw new Error("No API key found. Run: b2o login <email>, then b2o key set.");
   }
 
-  const response = await convertApi(apiKey, request, options.baseUrl);
-  logActualMatch(response, options.verbose);
-  logComplianceFallback(response);
+  let response: ConvertResponse;
+  try {
+    response = await convertApi(apiKey, request, options.baseUrl);
+  } catch (err) {
+    throw new NetworkStageError(err);
+  }
+  logActualMatch(response, options.verbose, logger);
+  logComplianceFallback(response, logger);
   const outBytes = applyConvertResponse(parsed, response);
   writeFileSync(outPath, outBytes);
-  console.log(`${entryName} -> ${outPath}`);
+  logger.log(`${entryName} -> ${outPath}`);
+}
+
+/** Whether the persisted state file (fingerprint -> succeeded/permanently-failed) is consulted at all. Off for a plain one-off `convert` call (which always reconverts, matching the existing documented default) -- on whenever the caller signals this is a repeated/resumable run (--watch, --archive-dir, or --skip-existing), and always off for --dry-run, which never has side effects to track. */
+function isStateTrackingActive(options: ConvertOptions): boolean {
+  return !options.dryRun && (options.watch || Boolean(options.archiveDir) || options.skipExisting);
 }
 
 /**
@@ -192,9 +247,20 @@ async function convertOne(
  * contention on the shared rate-limit counter, and keeps failure/resume
  * trivial to reason about (if this is interrupted, whichever line was
  * last printed tells you exactly where to resume).
+ *
+ * One bad file (or one bad entry inside a bundle) no longer aborts the
+ * rest of the batch -- each is caught individually so a folder of mostly
+ * good files still gets processed even if one is broken. When
+ * {@link isStateTrackingActive} applies, this also persists a
+ * succeeded/permanently-failed record per input (see watchState.ts) and,
+ * when --archive-dir is set, moves a fully-succeeded input there. This is
+ * the same code path for a one-shot cron-triggered call and for each file
+ * {@link runWatch} discovers -- --watch itself contributes nothing beyond
+ * the polling loop.
  */
 export async function runConvert(inputPaths: string[], options: ConvertOptions): Promise<void> {
   const { apiKey } = readConfig();
+  const { logger } = options;
   // Fail fast, before reading/parsing anything, rather than partway
   // through a batch -- --dry-run never touches the network, so it's the
   // one case allowed to proceed without a key at all.
@@ -208,22 +274,89 @@ export async function runConvert(inputPaths: string[], options: ConvertOptions):
   // for free (via --dry-run, no network conversion spent) is worth
   // pointing out before spending real quota on all of them.
   if (!options.dryRun && !options.profile && inputPaths.length > 1) {
-    console.log("Tip: run this same command with --dry-run first to preview which profile each file will auto-match to, before spending API quota on the live conversions.\n");
+    logger.log(
+      "Tip: run this same command with --dry-run first to preview which profile each file will auto-match to, before spending API quota on the live conversions.\n",
+    );
   }
+
+  const tracking = isStateTrackingActive(options);
 
   for (const inputPath of inputPaths) {
-    const bytes = new Uint8Array(readFileSync(inputPath));
+    const name = basename(inputPath);
     const defaultDir = dirname(resolve(inputPath));
-    const bundleEntries = unwrapIfBundle(bytes);
+    const workDir = resolveWorkDir(defaultDir, options.outDir);
 
-    if (bundleEntries) {
-      for (const entry of bundleEntries) {
-        await convertOne(entry.name, entry.bytes, defaultDir, inputPath, options, apiKey);
+    if (tracking) {
+      let fingerprint: string;
+      try {
+        fingerprint = computeFingerprint(inputPath);
+      } catch (err) {
+        logger.error(`Could not read ${name}: ${err instanceof Error ? err.message : String(err)}`);
+        continue;
       }
-    } else {
-      await convertOne(basename(inputPath), bytes, defaultDir, inputPath, options, apiKey);
+      const state = loadStateFile(workDir);
+      const record = state[name];
+      if (record && record.fingerprint === fingerprint) {
+        if (record.outcome === "succeeded") {
+          logger.log(`${name}: already converted (unchanged since last run) -- skipping`);
+          continue;
+        }
+        logger.log(`${name}: skipping -- previously failed with a non-retryable error (unchanged since last attempt). Fix or replace the file to retry.`);
+        continue;
+      }
+    }
+
+    let bytes: Uint8Array;
+    try {
+      bytes = new Uint8Array(readFileSync(inputPath));
+    } catch (err) {
+      logger.error(`Error reading ${name}: ${err instanceof Error ? err.message : String(err)}`);
+      continue;
+    }
+    const bundleEntries = unwrapIfBundle(bytes);
+    const entries = bundleEntries ?? [{ name, bytes }];
+
+    let anyFailed = false;
+    let allFailuresPermanent = true;
+    for (const entry of entries) {
+      try {
+        await convertOne(entry.name, entry.bytes, defaultDir, inputPath, options, apiKey);
+      } catch (err) {
+        anyFailed = true;
+        if (!isPermanentFailure(err)) allFailuresPermanent = false;
+        logger.error(`Error converting ${entry.name}: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    }
+
+    if (tracking) {
+      recordOutcome(workDir, name, inputPath, anyFailed, allFailuresPermanent);
+    }
+
+    if (!anyFailed && options.archiveDir && !options.dryRun) {
+      try {
+        const dest = archiveOriginal(inputPath, options.archiveDir);
+        logger.log(`${name}: archived to ${dest}`);
+      } catch (err) {
+        logger.error(`Could not archive ${name}: ${err instanceof Error ? err.message : String(err)}`);
+      }
     }
   }
+}
+
+/**
+ * Only ever records "succeeded" (every entry converted) or
+ * "permanently-failed" (every failing entry was non-retryable) -- if at
+ * least one entry failed transiently, nothing is persisted at all, so the
+ * whole input is fully eligible for retry next time (already-succeeded
+ * sibling entries just get skipped again cheaply via --skip-existing's own
+ * output-existence check, not redone).
+ */
+function recordOutcome(workDir: string, name: string, inputPath: string, anyFailed: boolean, allFailuresPermanent: boolean): void {
+  if (anyFailed && !allFailuresPermanent) return;
+  const fingerprint = computeFingerprint(inputPath);
+  const state: StateFile = loadStateFile(workDir);
+  state[name] = { fingerprint, outcome: anyFailed ? "permanently-failed" : "succeeded" };
+  saveStateFile(workDir, state);
 }
 
 const WATCH_POLL_INTERVAL_MS = 2000;
@@ -239,22 +372,25 @@ function isConvertibleFile(name: string): boolean {
 
 /** Per-file state a watch session tracks across polls -- exported only so tests can drive {@link watchPollOnce} deterministically, without any real timers. */
 export interface WatchState {
-  lastSize: Map<string, number>;
-  done: Set<string>;
+  /** The fingerprint last seen for a given filename -- used only to detect "unchanged since the previous poll" (the stability check), not to decide whether conversion is needed at all (that's runConvert's persisted state file's job). */
+  lastFingerprint: Map<string, string>;
+  /** "name:fingerprint" combos already handed to runConvert this session -- suppresses repeatedly re-attempting (and re-logging) the exact same version of a file on every poll. A changed fingerprint is a new entry, so an edited file is naturally let back through. */
+  reported: Set<string>;
 }
 
 export function createWatchState(): WatchState {
-  return { lastSize: new Map(), done: new Set() };
+  return { lastFingerprint: new Map(), reported: new Set() };
 }
 
 /**
- * Runs exactly one poll pass over `folder`, converting any file whose size
- * has just settled (unchanged from the previous poll) and hasn't already
- * been processed. Split out from {@link runWatch} purely so it can be
- * driven directly, poll by poll, in tests -- the real CLI path only ever
- * calls it from the infinite loop below.
+ * Runs exactly one poll pass over `folder`, converting any file whose
+ * fingerprint has just settled (unchanged from the previous poll) and
+ * hasn't already been handed to runConvert this session. Split out from
+ * {@link runWatch} purely so it can be driven directly, poll by poll, in
+ * tests -- the real CLI path only ever calls it from the infinite loop
+ * below.
  *
- * A file is only converted once its size is unchanged across two
+ * A file is only converted once its fingerprint is unchanged across two
  * consecutive polls -- guards against reading a file mid-copy/mid-download
  * (a partial zip fails to parse, which without this would either error out
  * permanently or, worse, silently succeed on truncated data).
@@ -262,24 +398,27 @@ export function createWatchState(): WatchState {
 export async function watchPollOnce(folder: string, options: ConvertOptions, state: WatchState): Promise<void> {
   const entries = readdirSync(folder).filter(isConvertibleFile);
   for (const name of entries) {
-    if (state.done.has(name)) continue;
+    const fullPath = join(folder, name);
 
-    let size: number;
+    let fingerprint: string;
     try {
-      size = statSync(join(folder, name)).size;
+      fingerprint = computeFingerprint(fullPath);
     } catch {
       continue; // vanished between readdir and stat -- reconsider next poll
     }
 
-    const previousSize = state.lastSize.get(name);
-    state.lastSize.set(name, size);
-    if (previousSize !== size) continue; // still being written (or just appeared) -- wait for the next poll to confirm it settled
+    const key = `${name}:${fingerprint}`;
+    if (state.reported.has(key)) continue; // this exact version of this file was already handed to runConvert this session
 
-    state.done.add(name);
+    const previousFingerprint = state.lastFingerprint.get(name);
+    state.lastFingerprint.set(name, fingerprint);
+    if (previousFingerprint !== fingerprint) continue; // still being written (or just appeared/changed) -- wait for the next poll to confirm it settled
+
+    state.reported.add(key);
     try {
-      await runConvert([join(folder, name)], options);
+      await runConvert([fullPath], options);
     } catch (err) {
-      console.error(`Error converting ${name}: ${err instanceof Error ? err.message : String(err)}`);
+      options.logger.error(`Error converting ${name}: ${err instanceof Error ? err.message : String(err)}`);
     }
   }
 }
@@ -295,7 +434,7 @@ export async function watchPollOnce(folder: string, options: ConvertOptions, sta
  */
 export async function runWatch(folder: string, options: ConvertOptions): Promise<void> {
   const state = createWatchState();
-  console.log(`Watching ${folder} for new .3mf/.zip files (Ctrl+C to stop)...`);
+  options.logger.log(`Watching ${folder} for new .3mf/.zip files (Ctrl+C to stop)...`);
   for (;;) {
     await watchPollOnce(folder, options, state);
     await sleep(WATCH_POLL_INTERVAL_MS);

@@ -1,9 +1,11 @@
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdtempSync, rmSync, utimesSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { B2oApiError } from "../convertClient.js";
+import { createLogger } from "../logger.js";
 import type { ConvertOptions } from "./convert.js";
-import { computeOutputPath, createWatchState, matchWarningLine, payloadFilePath, shouldSkipExisting, watchPollOnce } from "./convert.js";
+import { computeOutputPath, createWatchState, isPermanentFailure, matchWarningLine, payloadFilePath, shouldSkipExisting, watchPollOnce } from "./convert.js";
 
 describe("computeOutputPath", () => {
   it("appends the default _U1 suffix, alongside the input by default", () => {
@@ -91,17 +93,43 @@ describe("shouldSkipExisting", () => {
   });
 });
 
+describe("isPermanentFailure", () => {
+  it("treats a plain local error (parse failure, validation error, etc.) as permanent", () => {
+    expect(isPermanentFailure(new Error("not a valid zip"))).toBe(true);
+  });
+
+  it("treats a 4xx API error (other than 429) as permanent -- retrying the identical request won't help", () => {
+    expect(isPermanentFailure(new B2oApiError(400, "bad_request", "malformed request"))).toBe(true);
+    expect(isPermanentFailure(new B2oApiError(401, "invalid_api_key", "unknown key"))).toBe(true);
+    expect(isPermanentFailure(new B2oApiError(422, "validation_error", "bad payload"))).toBe(true);
+  });
+
+  it("treats a 5xx or 429 API error as transient -- worth retrying later", () => {
+    expect(isPermanentFailure(new B2oApiError(500, "internal_error", "server error"))).toBe(false);
+    expect(isPermanentFailure(new B2oApiError(503, "unavailable", "try later"))).toBe(false);
+    expect(isPermanentFailure(new B2oApiError(429, "rate_limited", "slow down"))).toBe(false);
+  });
+});
+
 describe("watchPollOnce", () => {
   let tempDir: string;
   let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
 
-  const options: ConvertOptions = { suffix: "_U1", dryRun: true, verbose: false, skipExisting: false, baseUrl: "http://example.invalid" };
+  const options: ConvertOptions = {
+    suffix: "_U1",
+    dryRun: true,
+    verbose: false,
+    skipExisting: false,
+    watch: true,
+    baseUrl: "http://example.invalid",
+    logger: createLogger({ quiet: false }),
+  };
 
   beforeEach(() => {
     tempDir = mkdtempSync(join(tmpdir(), "b2o-watch-test-"));
     // Every file below is plain text, not a real .3mf -- runConvert will fail to parse it and
     // log via console.error. That's fine here: these tests only care whether an attempt was
-    // made (and exactly once), not whether the conversion itself succeeded.
+    // made (and exactly once per distinct version of the file), not whether it succeeded.
     consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
@@ -115,20 +143,18 @@ describe("watchPollOnce", () => {
     const state = createWatchState();
     await watchPollOnce(tempDir, options, state);
     await watchPollOnce(tempDir, options, state);
-    expect(state.done.size).toBe(0);
     expect(consoleErrorSpy).not.toHaveBeenCalled();
   });
 
-  it("waits for a file's size to settle across two polls before attempting it", async () => {
+  it("waits for a file's fingerprint to settle across two polls before attempting it", async () => {
     const filePath = join(tempDir, "model.3mf");
     writeFileSync(filePath, "partial");
     const state = createWatchState();
 
     await watchPollOnce(tempDir, options, state); // first sighting -- not stable yet
-    expect(state.done.has("model.3mf")).toBe(false);
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
 
     await watchPollOnce(tempDir, options, state); // unchanged since the last poll -- now stable
-    expect(state.done.has("model.3mf")).toBe(true);
     expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
   });
 
@@ -140,23 +166,42 @@ describe("watchPollOnce", () => {
     await watchPollOnce(tempDir, options, state); // sees size 1
     writeFileSync(filePath, "aa"); // grew -- still being written
     await watchPollOnce(tempDir, options, state); // size changed (1 -> 2) -- still not stable
-    expect(state.done.has("model.3mf")).toBe(false);
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
 
     await watchPollOnce(tempDir, options, state); // unchanged (2 -> 2) -- now stable
-    expect(state.done.has("model.3mf")).toBe(true);
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
   });
 
-  it("never re-attempts a file it already processed, even if its size changes later", async () => {
+  it("never re-attempts the same unchanged file across many polls", async () => {
     const filePath = join(tempDir, "model.3mf");
     writeFileSync(filePath, "aaaa");
     const state = createWatchState();
     await watchPollOnce(tempDir, options, state);
-    await watchPollOnce(tempDir, options, state); // now done, one attempt logged
-    expect(state.done.has("model.3mf")).toBe(true);
+    await watchPollOnce(tempDir, options, state); // now stable, attempted once
     expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
 
-    writeFileSync(filePath, "bbbbbbbb"); // size changed -- shouldn't matter, already done
+    await watchPollOnce(tempDir, options, state);
     await watchPollOnce(tempDir, options, state);
     expect(consoleErrorSpy).toHaveBeenCalledTimes(1); // still just the one attempt
+  });
+
+  it("reprocesses a file whose content changed even though its size stayed exactly the same", async () => {
+    const filePath = join(tempDir, "model.3mf");
+    writeFileSync(filePath, "Core pieces"); // 11 bytes
+    const state = createWatchState();
+    await watchPollOnce(tempDir, options, state);
+    await watchPollOnce(tempDir, options, state); // stable, attempted once
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+
+    // Same byte length, different content (a same-size typo fix) -- force a distinct mtime
+    // rather than relying on real elapsed time between two synchronous writes in the same test.
+    writeFileSync(filePath, "Core Pieces"); // still 11 bytes
+    const future = new Date(Date.now() + 5000);
+    utimesSync(filePath, future, future);
+
+    await watchPollOnce(tempDir, options, state); // fingerprint changed -- not stable yet
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+    await watchPollOnce(tempDir, options, state); // stable again -- reprocessed
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(2);
   });
 });

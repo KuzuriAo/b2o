@@ -9,6 +9,7 @@ import { parseArgs } from "node:util";
 import { runConvert, runWatch, type ConvertOptions } from "./commands/convert.js";
 import { runKeySet, runKeyShow } from "./commands/key.js";
 import { runLogin } from "./commands/login.js";
+import { createLogger } from "./logger.js";
 import { runProfiles } from "./commands/profiles.js";
 import { DEFAULT_BASE_URL } from "./convertClient.js";
 import { formatTable } from "./table.js";
@@ -116,6 +117,9 @@ ${formatOptions([
   ["--suffix <text>", 'Output filename suffix (default: "_U1"; pass "" to remove it -- refused if that would make the output path identical to the input file)'],
   ["--skip-existing", "Skip a file entirely (no network call) if its output already exists -- for resuming an interrupted batch. Off by default: a normal run always overwrites, same as re-running a build"],
   ["--watch", 'Watch <files...> (must be exactly one existing folder) for new .3mf/.zip files and convert each as it appears, running until Ctrl+C. Requires --out-dir pointing somewhere other than the watched folder'],
+  ["--archive-dir <dir>", "After a file fully converts, move the original there (collision-safe, atomic where possible). The recommended way to keep a watched/cron-processed folder from ever needing to be rescanned -- see below"],
+  ["--log-file <path>", "Append every log/error line (timestamped) to this file, in addition to stdout/stderr"],
+  ["--quiet", "Suppress stdout/stderr entirely. Requires --log-file -- refused otherwise, so an error never has nowhere to go"],
   ["--dry-run", "Parse and show exactly what would be sent, without any network call or output file"],
   ["--verbose", "Show what's being sent immediately before a real conversion"],
   ["--api-base <url>", `Override the API base URL (default: ${DEFAULT_BASE_URL})`],
@@ -136,6 +140,30 @@ file as it appears (Ctrl+C to stop):
 the one being watched -- otherwise a freshly written output would get
 picked up as a "new" input on the next poll, converting its own output
 forever.
+
+--watch isn't the only way to process a folder repeatedly -- everything
+below works identically from a plain (non-watch) convert call too, e.g.
+one triggered periodically by cron:
+  */5 * * * *  b2o convert ./exports --archive-dir ./exports/done --out-dir ./converted --log-file ./b2o.log --quiet
+
+Whenever --watch, --archive-dir, or --skip-existing is set (--dry-run
+never has side effects to track, so it's exempt), a small state file
+(<out-dir or default dir>/.b2o-state.json) records, per input, whether it
+fully succeeded or failed with a non-retryable error -- checked by name,
+size, AND modification time together, so even a same-size content edit
+(e.g. fixing a typo in a plate name) is correctly seen as changed, not
+skipped. A failure classified as non-retryable (a corrupt file, or the
+API rejecting the request itself) is skipped on future runs without
+retrying it forever; a transient one (the network being down, the server
+erroring, a rate limit) is always retried next time. One bad file no
+longer aborts the rest of a batch either -- each is handled independently.
+
+--archive-dir is the cleaner option when your workflow allows it: once a
+file fully converts, the original moves out of the watched/cron-scanned
+folder entirely, so there's nothing left to ever rescan -- no repeated
+unzipping of large bundles, no state file needed for it at all. Use the
+state-file fallback above (--skip-existing, or --watch on its own)
+instead when the folder needs to keep its original files in place.
 
 Don't want to take even that file on faith? Set HTTPS_PROXY to a local
 mitmproxy instance and watch the actual decrypted HTTPS traffic:
@@ -223,6 +251,9 @@ async function main(): Promise<void> {
           verbose: { type: "boolean", default: false },
           "skip-existing": { type: "boolean", default: false },
           watch: { type: "boolean", default: false },
+          "archive-dir": { type: "string" },
+          "log-file": { type: "string" },
+          quiet: { type: "boolean", default: false },
           "api-base": { type: "string", default: DEFAULT_BASE_URL },
         },
       });
@@ -231,15 +262,21 @@ async function main(): Promise<void> {
       if (filamentCompliance !== undefined && filamentCompliance !== "generic" && filamentCompliance !== "snapmaker") {
         throw new Error(`--filament-compliance must be "generic" or "snapmaker", got "${filamentCompliance}" (see: b2o convert --help)`);
       }
+      if (values.quiet && !values["log-file"]) {
+        throw new Error("--quiet requires --log-file -- otherwise errors would have nowhere to go (see: b2o convert --help)");
+      }
       const convertOptions: ConvertOptions = {
         profile: values.profile,
         filamentCompliance,
         outDir: values["out-dir"],
+        archiveDir: values["archive-dir"],
         suffix: values.suffix ?? "_U1",
         dryRun: Boolean(values["dry-run"]),
         verbose: Boolean(values.verbose),
         skipExisting: Boolean(values["skip-existing"]),
+        watch: Boolean(values.watch),
         baseUrl: values["api-base"] ?? DEFAULT_BASE_URL,
+        logger: createLogger({ logFile: values["log-file"], quiet: Boolean(values.quiet) }),
       };
 
       if (values.watch) {
