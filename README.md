@@ -75,7 +75,14 @@ Set the `B2O_API_KEY` environment variable instead of running `key set` interact
 B2O_API_KEY=b2o_live_xxxxx npx @kuzuri.ao/b2o convert model.3mf --out-dir ./dist
 ```
 
-`B2O_API_KEY` always takes priority over a saved config file when both are present. This is the path for a vendor's publish workflow, a CI job, or any other automated caller that has no terminal to answer an interactive hidden-input prompt against. If you're integrating this into a larger automated pipeline (e.g. regenerating profiles for an entire model catalog on publish), there's also a Vendor API Integration Guide covering calling the underlying API directly, without shelling out to this CLI at all, plus the higher-quota org/vendor tier for bulk/automated use — it isn't publicly hosted yet, so send a Ko-fi message via [ko-fi.com/b2o](https://ko-fi.com/b2o) if you need a copy or want your key promoted to that tier.
+`B2O_API_KEY` always takes priority over a saved config file when both are present. This is the path for a vendor's publish workflow, a CI job, or any other automated caller that has no terminal to answer an interactive hidden-input prompt against. If you're integrating this into a larger automated pipeline (e.g. regenerating profiles for an entire model catalog on publish), see "Beyond the CLI" below — the higher-quota org/vendor tier itself still isn't self-serve, so send a Ko-fi message via [ko-fi.com/b2o](https://ko-fi.com/b2o) to request promotion once you have a free key.
+
+## Beyond the CLI
+
+Everything here also works as a direct HTTP API call — no server to stand up, no Docker container, nothing to install beyond your own code making one request. Two docs cover this in depth:
+
+- **[Vendor API Integration Guide](./docs/vendor-api-integration-guide.md)** — the full technical reference: request/response schemas, auth, rate limits, error codes, and the three ways to integrate (a visitor-facing handoff needing no API key at all, server-side automation, or your own admin UI).
+- **[AI Agent Integration Brief](./docs/ai-agent-integration-brief.md)** — written to be handed directly to a coding agent (Claude Code or similar) working in your own site's codebase, alongside the guide above. It's the decision-and-action layer: investigate your own codebase, pick the integration shape that actually fits, then implement.
 
 ## API keys & quotas
 
