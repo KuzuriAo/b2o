@@ -1,0 +1,53 @@
+{
+  "name": "@kuzuri.ao/b2o",
+  "private": false,
+  "version": "0.0.3",
+  "type": "module",
+  "description": "Convert Bambu Studio .3mf files to Snapmaker U1 / OrcaSlicer format from the command line.",
+  "license": "MIT",
+  "keywords": [
+    "bambu-lab",
+    "bambu-studio",
+    "snapmaker",
+    "snapmaker-u1",
+    "orcaslicer",
+    "3mf",
+    "3d-printing",
+    "slicer",
+    "cli"
+  ],
+  "author": "Kuzuri",
+  "homepage": "https://b2o.kuzuriao.com/",
+  "funding": {
+    "type": "ko-fi",
+    "url": "https://ko-fi.com/b2o"
+  },
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "b2o": "dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --emitDeclarationOnly && node build.mjs && chmod +x dist/cli.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "undici": "^8.10.0",
+    "fflate": "^0.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4",
+    "zod": "^3.25.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KuzuriAo/b2o.git"
+  }
+}

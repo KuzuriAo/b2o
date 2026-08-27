@@ -1,0 +1,4502 @@
+[
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#00BE57",
+    "name": "ABS Bambu Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#101010",
+    "name": "ABS Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#20213F",
+    "name": "ABS Navy Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#2940AB",
+    "name": "ABS Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#5F4487",
+    "name": "ABS \u30e9\u30d9\u30f3\u30c0\u30fc"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#5FAEE6",
+    "name": "ABS Azure"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#615E5F",
+    "name": "ABS Silver"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#618A4E",
+    "name": "ABS Olive"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#BD0713",
+    "name": "ABS Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#D2CCC6",
+    "name": "ABS White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#E5DAA4",
+    "name": "ABS \u30d9\u30fc\u30b8\u30e5"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#F4732C",
+    "name": "ABS Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS",
+    "hex": "#FCC743",
+    "name": "ABS Tangerine Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS-GF",
+    "hex": "#00C34F",
+    "name": "Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS-GF",
+    "hex": "#023BB4",
+    "name": "Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS-GF",
+    "hex": "#313233",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS-GF",
+    "hex": "#BBC1BD",
+    "name": "Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS-GF",
+    "hex": "#D85642",
+    "name": "Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS-GF",
+    "hex": "#E7E8E4",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS-GF",
+    "hex": "#EFDD59",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ABS-GF",
+    "hex": "#FF844E",
+    "name": "Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ASA",
+    "hex": "#00BDB3",
+    "name": "Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ASA",
+    "hex": "#161616",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ASA",
+    "hex": "#1A358E",
+    "name": "Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ASA",
+    "hex": "#706D71",
+    "name": "Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ASA",
+    "hex": "#DA3340",
+    "name": "Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ASA",
+    "hex": "#DFD6D4",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ASA Aero",
+    "hex": "#EBE8DE",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "ASA-CF",
+    "hex": "#2B2C2E",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PA6-GF",
+    "hex": "#1C1C1C",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PA6-GF",
+    "hex": "#515254",
+    "name": "Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PA6-GF",
+    "hex": "#7EB2E2",
+    "name": "Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PA6-GF",
+    "hex": "#9B7457",
+    "name": "Brown"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PA6-GF",
+    "hex": "#AFCB5C",
+    "name": "Lime"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PA6-GF",
+    "hex": "#E6E3DE",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PA6-GF",
+    "hex": "#FD8256",
+    "name": "Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PA6-GF",
+    "hex": "#FFCC01",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PAHT-CF",
+    "hex": "#171919",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PC",
+    "hex": "#1F1E20",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PC",
+    "hex": "#57595A",
+    "name": "Clear Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PC",
+    "hex": "#CFCECC",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PC",
+    "hex": "#D8D8D8",
+    "name": "Transparent"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PC FR",
+    "hex": "#242424",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PC FR",
+    "hex": "#9C9C9C",
+    "name": "Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PC FR",
+    "hex": "#E5E5E5",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PET-CF",
+    "hex": "#1E1E1E",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#1059C0",
+    "name": "PETG Basic - Navy Blue(30604) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#131313",
+    "name": "PETG Basic - Black(30105) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#1A2E91",
+    "name": "PETG Basic - Reflex Blue(30603) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#1C352F",
+    "name": "PETG Basic - Pine Green(30503) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#1F9C4E",
+    "name": "PETG Basic - Green(30502) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#321D18",
+    "name": "PETG Basic - Dark Brown(30800) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#526778",
+    "name": "PETG Basic - Misty Blue(30108) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#626367",
+    "name": "PETG Basic - Gray(30107) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#DE2F2F",
+    "name": "PETG Basic - Red(30201) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#EBD8C9",
+    "name": "PETG Basic - Dark Beige(30403) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#EFEBEA",
+    "name": "PETG Basic - White(30106) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#F94C08",
+    "name": "PETG Basic - Orange(30301) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Basic",
+    "hex": "#FAD92F",
+    "name": "PETG Basic - Yellow(30402) / Refill / 1kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#04AE4E",
+    "name": "Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#1771C9",
+    "name": "Lake Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#1C1C1C",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#212323",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#232B6C",
+    "name": "Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#2F3E2B",
+    "name": "Forest Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#5B5C5E",
+    "name": "Dark Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#66E455",
+    "name": "Lime Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#9F9D9E",
+    "name": "Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#AB511F",
+    "name": "Peanut Brown"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#D1CFD4",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#E8C529",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#ED292D",
+    "name": "Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#EE7131",
+    "name": "Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG HF",
+    "hex": "#F6DBBE",
+    "name": "Cream"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Translucent",
+    "hex": "#95F0DF",
+    "name": "Translucent Teal"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Translucent",
+    "hex": "#BEBABB",
+    "name": "Translucent Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Translucent",
+    "hex": "#BEBEBE",
+    "name": "Clear"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Translucent",
+    "hex": "#CAD8BE",
+    "name": "Translucent Olive"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Translucent",
+    "hex": "#CCE2F9",
+    "name": "Translucent Light Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Translucent",
+    "hex": "#E0CCE8",
+    "name": "Translucent Purple"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Translucent",
+    "hex": "#F0D5BA",
+    "name": "Translucent Brown"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Translucent",
+    "hex": "#F2D7DC",
+    "name": "Translucent Pink"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG Translucent",
+    "hex": "#FFB94B",
+    "name": "Translucent Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG-CF",
+    "hex": "#126753",
+    "name": "Malachite Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG-CF",
+    "hex": "#2E2E2E",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG-CF",
+    "hex": "#2E3C5E",
+    "name": "Indigo Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG-CF",
+    "hex": "#39393B",
+    "name": "Titan Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG-CF",
+    "hex": "#3D2555",
+    "name": "Violet Purple"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PETG-CF",
+    "hex": "#7A312C",
+    "name": "Brick Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Aero",
+    "hex": "#1C1B19",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Aero",
+    "hex": "#C0C6C5",
+    "name": "Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Aero",
+    "hex": "#DDDBD9",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#000000",
+    "name": "Basic Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#0056B8",
+    "name": "Basic Cobalt Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#0086D6",
+    "name": "Basic Cyan"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#00AE42",
+    "name": "Basic Bambu Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#00B1B7",
+    "name": "Basic Turquoise"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#0A2989",
+    "name": "Basic Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#3F8E43",
+    "name": "Basic Mistletoe Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#482960",
+    "name": "Basic Indigo Purple"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#545454",
+    "name": "Basic Dark Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#5B6579",
+    "name": "Basic Blue Grey"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#5E43B7",
+    "name": "Basic Purple"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#6F5034",
+    "name": "Basic Cocoa Brown"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#847D48",
+    "name": "Basic Bronze"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#8E9089",
+    "name": "Basic Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#9D2235",
+    "name": "Basic Maroon Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#9D432C",
+    "name": "Basic Brown"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#A6A9AA",
+    "name": "Basic Silver"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#BECF00",
+    "name": "Basic Bright Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#C12E1F",
+    "name": "Basic Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#D1D3D5",
+    "name": "Basic Light Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#E4BD68",
+    "name": "Basic Gold"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#EC008C",
+    "name": "Basic Magenta"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#F4EE2A",
+    "name": "Basic Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#F5547C",
+    "name": "Basic Hot Pink"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#F55A74",
+    "name": "Basic Pink"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#F7E6DE",
+    "name": "Basic Beige"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#FEC600",
+    "name": "Basic Sunflower Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#FF6A13",
+    "name": "Basic Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#FF9016",
+    "name": "Basic Pumpkin Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic",
+    "hex": "#FFFFFF",
+    "name": "Basic Jade White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic Gradient",
+    "hex": "#319EC5",
+    "name": "Ocean to Meadow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic Gradient",
+    "hex": "#35E97E",
+    "name": "Mint Lime"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic Gradient",
+    "hex": "#8F9FDB",
+    "name": "Blueberry Bubblegum"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic Gradient",
+    "hex": "#AFD8D6",
+    "name": "Arctic Whisper"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic Gradient",
+    "hex": "#C1E8F9",
+    "name": "Cotton Candy Cloud"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic Gradient",
+    "hex": "#F2804C",
+    "name": "Dusk Glare"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic Gradient",
+    "hex": "#F68562",
+    "name": "Solar Breeze"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Basic Gradient",
+    "hex": "#FF7163",
+    "name": "Pink Citrus"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Galaxy",
+    "hex": "#3B665E",
+    "name": "Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Galaxy",
+    "hex": "#424379",
+    "name": "Nebulae"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Galaxy",
+    "hex": "#594177",
+    "name": "Purple"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Galaxy",
+    "hex": "#684A43",
+    "name": "Brown"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Glow",
+    "hex": "#63F06D",
+    "name": "Glow Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Glow",
+    "hex": "#6AAED3",
+    "name": "Glow Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Glow",
+    "hex": "#B9E339",
+    "name": "Glow Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Glow",
+    "hex": "#E8DD75",
+    "name": "Glow Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Glow",
+    "hex": "#F17B8F",
+    "name": "\"Glow Pink\""
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Marble",
+    "hex": "#AD4E38",
+    "name": "Red Granite"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Marble",
+    "hex": "#F7F3F0",
+    "name": "White Marble"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#000000",
+    "name": "Matte Charcoal"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#0078BF",
+    "name": "Matte Marine Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#042F56",
+    "name": "Matte Dark Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#4D3324",
+    "name": "Matte Dark Chocolate"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#56B7E6",
+    "name": "Matte Sky Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#61C680",
+    "name": "Matte Grass Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#68724D",
+    "name": "Matte Dark Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#757575",
+    "name": "Matte Nardo Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#7D6556",
+    "name": "Matte Dark Brown"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#950051",
+    "name": "Matte Plum"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#9B9EA0",
+    "name": "Matte Ash Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#A3D8E1",
+    "name": "Matte Ice Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#AE835B",
+    "name": "Matte Caramel"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#AE96D4",
+    "name": "Matte Lilac purple"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#B15533",
+    "name": "Matte Terracotta"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#BB3D43",
+    "name": "Matte Dark Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#C2E189",
+    "name": "Matte Apple Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#CBC6B8",
+    "name": "Matte Bone White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#D3B7A7",
+    "name": "Matte Latte Brown"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#DE4343",
+    "name": "Matte Scarlet Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#E8AFCF",
+    "name": "Matte Sakura Pink"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#E8DBB7",
+    "name": "Matte Desert Tan"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#F7D959",
+    "name": "Matte Lemon Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#F99963",
+    "name": "Matte Mandarin Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Matte",
+    "hex": "#FFFFFF",
+    "name": "Matte Ivory White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Metal",
+    "hex": "#1D7C6A",
+    "name": "Oxide Green Metallic"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Metal",
+    "hex": "#39699E",
+    "name": "Cobalt Blue Metallic"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Metal",
+    "hex": "#43403D",
+    "name": "Iron Gray Metallic"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Metal",
+    "hex": "#AA6443",
+    "name": "Copper Brown Metallic"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Metal",
+    "hex": "#B39B84",
+    "name": "Iridium Gold Metallic"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Pure",
+    "hex": "#242426",
+    "name": "Absolute Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Pure",
+    "hex": "#C6ECF5",
+    "name": "Baby Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Pure",
+    "hex": "#EFEBE8",
+    "name": "Pure White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Pure",
+    "hex": "#F4D0D0",
+    "name": "Milky Pink"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Pure",
+    "hex": "#FCAD5E",
+    "name": "Apricot"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk Multi-Color",
+    "hex": "#2A77A5",
+    "name": "Phantom Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk Multi-Color",
+    "hex": "#3D184C",
+    "name": "Aurora Purple"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk Multi-Color",
+    "hex": "#526255",
+    "name": "Mystic Magenta"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk Multi-Color",
+    "hex": "#5766B0",
+    "name": "Midnight Blaze"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk Multi-Color",
+    "hex": "#5DC9CE",
+    "name": "Blue Hawaii"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk Multi-Color",
+    "hex": "#721E1C",
+    "name": "Velvet Eclipse"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk Multi-Color",
+    "hex": "#8A87B4",
+    "name": "Dawn Radiance"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk Multi-Color",
+    "hex": "#C29FB5",
+    "name": "South Beach"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk Multi-Color",
+    "hex": "#C9A3DB",
+    "name": "Neon City"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk Multi-Color",
+    "hex": "#FF8286",
+    "name": "Gilded Rose"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#008BDA",
+    "name": "Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#018814",
+    "name": "Candy Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#5F6367",
+    "name": "Titan Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#81A1BA",
+    "name": "Baby Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#8671CB",
+    "name": "Purple"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#87CCB0",
+    "name": "Mint"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#9F5346",
+    "name": "Rose Gold"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#C8C8C8",
+    "name": "Silver"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#D02727",
+    "name": "Candy Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#D3D2D0",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#E1B38F",
+    "name": "Champagne"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#E8B69D",
+    "name": "Pink"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Silk+",
+    "hex": "#F4A925",
+    "name": "Gold"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Sparkle",
+    "hex": "#2D2B28",
+    "name": "Onyx Black Sparkle"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Sparkle",
+    "hex": "#3F5443",
+    "name": "Alpine Green Sparkle"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Sparkle",
+    "hex": "#483D8B",
+    "name": "Royal Purple Sparkle"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Sparkle",
+    "hex": "#792B36",
+    "name": "Crimson Red Sparkle"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Sparkle",
+    "hex": "#8E9089",
+    "name": "Slate Gray Sparkle"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Sparkle",
+    "hex": "#CEA629",
+    "name": "Classic Gold Sparkle"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Tough+",
+    "hex": "#1A1A1A",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Tough+",
+    "hex": "#27A9DB",
+    "name": "Cyan"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Tough+",
+    "hex": "#707072",
+    "name": "Silver"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Tough+",
+    "hex": "#A5A5A5",
+    "name": "Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Tough+",
+    "hex": "#EAE5E1",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Tough+",
+    "hex": "#EF5320",
+    "name": "Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Tough+",
+    "hex": "#FCCD37",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Translucent",
+    "hex": "#0047BB",
+    "name": "Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Translucent",
+    "hex": "#009FA1",
+    "name": "Teal"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Translucent",
+    "hex": "#8344B0",
+    "name": "Purple"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Translucent",
+    "hex": "#B50011",
+    "name": "Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Translucent",
+    "hex": "#CAF2DA",
+    "name": "Light Jade"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Translucent",
+    "hex": "#DCEFFD",
+    "name": "Ice Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Translucent",
+    "hex": "#EBE3FB",
+    "name": "Lavender"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Translucent",
+    "hex": "#F5B6CD",
+    "name": "Cherry Pink"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Translucent",
+    "hex": "#F74E02",
+    "name": "Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Translucent",
+    "hex": "#FCF0DA",
+    "name": "Mellow Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Wood",
+    "hex": "#4C241C",
+    "name": "Rosewood"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Wood",
+    "hex": "#4F3F24",
+    "name": "Black Walnut"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Wood",
+    "hex": "#918669",
+    "name": "Classic Birch"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Wood",
+    "hex": "#995F11",
+    "name": "Clay Brown"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Wood",
+    "hex": "#C98935",
+    "name": "Ochre Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA Wood",
+    "hex": "#D6CCA3",
+    "name": "White Oak"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA-CF",
+    "hex": "#1C1B21",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA-CF",
+    "hex": "#293370",
+    "name": "Royal Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA-CF",
+    "hex": "#494552",
+    "name": "Lava Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA-CF",
+    "hex": "#515F80",
+    "name": "Jeans Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA-CF",
+    "hex": "#593B6F",
+    "name": "Iris Purple"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA-CF",
+    "hex": "#5A7243",
+    "name": "Matcha Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PLA-CF",
+    "hex": "#743142",
+    "name": "Burgundy Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PPA-CF",
+    "hex": "#252324",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "PPS-CF",
+    "hex": "#252424",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#303333",
+    "name": "TPU 90A / Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#303433",
+    "name": "TPU 85A / Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#3D2922",
+    "name": "TPU 90A / Cocoa Brown"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#4DC7EE",
+    "name": "TPU 90A / Frozen"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#9A9DA2",
+    "name": "TPU 85A / TPU 90A - TPU 90A / Quicksilver(51106) / 1 kg"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#A9E7DA",
+    "name": "TPU 85A / Light Cyan"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#DAEBF5",
+    "name": "TPU 90A / Crystal Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#DAF38B",
+    "name": "TPU 85A / Lime Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#F2403C",
+    "name": "TPU 90A / Blaze"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#F2F2F2",
+    "name": "TPU 90A / White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#F4E7F1",
+    "name": "TPU 90A / Grape Jelly"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#F68F4C",
+    "name": "TPU 85A / Neon Orange"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 85A / TPU 90A",
+    "hex": "#FADDBD",
+    "name": "TPU 85A / Rose Beige / Flesh"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 95A HF",
+    "hex": "#1D97D3",
+    "name": "Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 95A HF",
+    "hex": "#303333",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 95A HF",
+    "hex": "#88888C",
+    "name": "Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 95A HF",
+    "hex": "#CE1D22",
+    "name": "Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 95A HF",
+    "hex": "#EAE303",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU 95A HF",
+    "hex": "#ECECEE",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU for AMS",
+    "hex": "#191919",
+    "name": "Black"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU for AMS",
+    "hex": "#5E85E0",
+    "name": "Blue"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU for AMS",
+    "hex": "#848388",
+    "name": "Gray"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU for AMS",
+    "hex": "#8CE950",
+    "name": "Neon Green"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU for AMS",
+    "hex": "#E1DDDA",
+    "name": "White"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU for AMS",
+    "hex": "#EB4142",
+    "name": "Red"
+  },
+  {
+    "vendor": "bambu",
+    "type": "TPU for AMS",
+    "hex": "#F0D71B",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 ASA-CF08",
+    "hex": "#000000",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 ASA-CF08",
+    "hex": "#30548E",
+    "name": "Navy Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 ASA-CF08",
+    "hex": "#4D5E70",
+    "name": "Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 ASA-CF08",
+    "hex": "#855261",
+    "name": "Dark Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 ASA-CF08",
+    "hex": "#ADC4D6",
+    "name": "Light Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 ASA-CF08",
+    "hex": "#CEB69C",
+    "name": "Desert Sand"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PA12-CF10",
+    "hex": "#302F2F",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PA6-CF20",
+    "hex": "#312F2F",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PA6-GF25",
+    "hex": "#75787B",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PA612-CF15",
+    "hex": "#302E2F",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PA612-ESD",
+    "hex": "#161618",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PET-CF17",
+    "hex": "#302E2F",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PET-GF15",
+    "hex": "#000000",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PET-GF15",
+    "hex": "#0F191F",
+    "name": "Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PET-GF15",
+    "hex": "#6E9EFF",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PET-GF15",
+    "hex": "#A9ABAF",
+    "name": "Light Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PET-GF15",
+    "hex": "#CC0033",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PET-GF15",
+    "hex": "#FFFFFF",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PETG-ESD",
+    "hex": "#161618",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PETG-rCF08",
+    "hex": "#302E2F",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PPS-CF10",
+    "hex": "#302E2F",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Fiberon\u2122 PPS-GF20",
+    "hex": "#75787B",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#003776",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#0066D9",
+    "name": "Azure Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#06924D",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#080A0D",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#485259",
+    "name": "Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#487BA2",
+    "name": "Stone Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#4CC0C7",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#4E742D",
+    "name": "Jungle Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#55331A",
+    "name": "Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#575B54",
+    "name": "Dark Olive Drab"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#5EBDDB",
+    "name": "Aqua Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#616469",
+    "name": "Steel Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#6C47B2",
+    "name": "Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#8C9099",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#948902",
+    "name": "Olive Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#A79E82",
+    "name": "Tan"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#C2AB72",
+    "name": "Beige"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#D5D701",
+    "name": "Lime Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#D60212",
+    "name": "Wine Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#D9DFE5",
+    "name": "Cold White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#E72F1D",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#EBF7FF",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#EED1A8",
+    "name": "Cream"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#EED230",
+    "name": "Lemon Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#F1A1AF",
+    "name": "Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#F24574",
+    "name": "Magenta"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#F67405",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Basic PLA",
+    "hex": "#FFE800",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#003776",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#06924D",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#080A0D",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#485259",
+    "name": "Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#487BA2",
+    "name": "Stone Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#4CC0C7",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#4E742D",
+    "name": "Jungle Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#55331A",
+    "name": "Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#575B54",
+    "name": "Olive Drab Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#5EBDDB",
+    "name": "Aqua Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#616469",
+    "name": "Steel Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#6C47B2",
+    "name": "Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#8C9099",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#948902",
+    "name": "Olive Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#A79E82",
+    "name": "Tan"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#C2AB72",
+    "name": "Beige"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#D5D701",
+    "name": "Lime Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#D60212",
+    "name": "Wine Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#D9DFE5",
+    "name": "Cold White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#E72F1D",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#EBF7FF",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#EED1A8",
+    "name": "Cream"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#EED230",
+    "name": "Lemon Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#F1A1AF",
+    "name": "Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#F24574",
+    "name": "Magenta"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#F67405",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 CoPE",
+    "hex": "#FFE800",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Galaxy PLA",
+    "hex": "#760007",
+    "name": "Hedgehog Makes - Galaxy Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Luminous PLA",
+    "hex": "#5FA8C2",
+    "name": "Luminous Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Luminous PLA",
+    "hex": "#BFEB8C",
+    "name": "Luminous Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Luminous PLA",
+    "hex": "#EEDC48",
+    "name": "Luminous Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Luminous PLA",
+    "hex": "#FE9176",
+    "name": "Luminous Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Luminous PLA",
+    "hex": "#FEBE5F",
+    "name": "Luminous Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#0163A6",
+    "name": "Matte Sapphire Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#1AC5FC",
+    "name": "Matte Sky Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#22624F",
+    "name": "Matte Emerald Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#2E4462",
+    "name": "Matte Army Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#2F2E30",
+    "name": "Matte Charcoal Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#32BC46",
+    "name": "Matte Grass Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#36364A",
+    "name": "Matte Army Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#485155",
+    "name": "Matte Ash Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#5472D0",
+    "name": "Matte Raspberry Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#5D989E",
+    "name": "Matte Muted Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#5F6244",
+    "name": "Matte Army Dark Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#5F778E",
+    "name": "Matte Muted Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#60AD70",
+    "name": "Matte Forest Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#61BCC3",
+    "name": "Matte Arctic Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#6858A9",
+    "name": "Matte Electric Indigo"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#753E4C",
+    "name": "Matte Wine Burgundy"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#777E71",
+    "name": "Matte Muted Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#795A4D",
+    "name": "Matte Army Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#7C594A",
+    "name": "Matte Earth Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#7C5C78",
+    "name": "Matte Muted Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#7DD4BE",
+    "name": "Matte Seafoam Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#8A8C94",
+    "name": "Matte Fossil Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#92864F",
+    "name": "Matte Muted Moss"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#9572BF",
+    "name": "Matte Lavender Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#A36D82",
+    "name": "Matte Muted Mauve"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#A4D0DF",
+    "name": "Matte Pastel Ice"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#AB7449",
+    "name": "Matte Wood Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#AB8C02",
+    "name": "Matte Army Light Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#ADB4E6",
+    "name": "Matte Pastel Periwinkle"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#BBADA4",
+    "name": "Matte Muted White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#BF312E",
+    "name": "Matte Army Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#BF9573",
+    "name": "Matte Pastel Peanut"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#C06443",
+    "name": "Matte Muted Terracotta"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#D2DEBB",
+    "name": "Matte Pastel Mint"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#D7D602",
+    "name": "Matte Lime Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#D84B2E",
+    "name": "Matte Muted Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#DBBAA5",
+    "name": "Matte Army Beige"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#DD76C0",
+    "name": "Matte Lotus Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#E4D0B0",
+    "name": "Matte Pastel Beige"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#EAADBD",
+    "name": "Matte Sakura Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#ED2F2E",
+    "name": "Matte Lava Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#EE474B",
+    "name": "Matte Pastel Watermelon"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#F09A7E",
+    "name": "Matte Pastel Coral"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#F0D6D9",
+    "name": "Matte Pastel Candy"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#F3C432",
+    "name": "Matte Savannah Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#F4EFEB",
+    "name": "Matte Cotton White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#F6BF8B",
+    "name": "Matte Pastel Peach"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#F7D475",
+    "name": "Matte Pastel Banana"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#F88B17",
+    "name": "Matte Sunrise Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Matte PLA",
+    "hex": "#F9DA07",
+    "name": "Matte Sunshine Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#003776",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#0163A6",
+    "name": "Matte Sapphire Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#06924D",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#080A0D",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#2E4462",
+    "name": "Matte Army Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#2F2E30",
+    "name": "Matte Charcoal Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#4CC0C7",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#55331A",
+    "name": "Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#5F6244",
+    "name": "Matte Army Dark Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#60AD70",
+    "name": "Matte Forest Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#616469",
+    "name": "Steel Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#61BCC3",
+    "name": "Matte Arctic Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#7C594A",
+    "name": "Matte Earth Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#8A8C94",
+    "name": "Matte Fossil Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#8C9099",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#9572BF",
+    "name": "Matte Lavender Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#AB7449",
+    "name": "Matte Wood Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#AF6B4C",
+    "name": "Silk Bronze"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#BCC2C8",
+    "name": "Silk Silver"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#BF312E",
+    "name": "Matte Army Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#BF9573",
+    "name": "Matte Pastel Peanut"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#C49449",
+    "name": "Silk Gold"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#D9DFE5",
+    "name": "Cold White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#DBBAA5",
+    "name": "Matte Army Beige"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#E72F1D",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#EAADBD",
+    "name": "Matte Sakura Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#EBF7FF",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#ED2F2E",
+    "name": "Matte Lava Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#F3C432",
+    "name": "Matte Savannah Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#F4EFEB",
+    "name": "Matte Cotton White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#F67405",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#F88B17",
+    "name": "Matte Sunrise Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 PLA Refill",
+    "hex": "#FFE800",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Satin PLA",
+    "hex": "#0162A6",
+    "name": "Satin Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Satin PLA",
+    "hex": "#302E30",
+    "name": "Satin Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Satin PLA",
+    "hex": "#5EAB71",
+    "name": "Satin Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Satin PLA",
+    "hex": "#61BBC1",
+    "name": "Satin Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Satin PLA",
+    "hex": "#797E89",
+    "name": "Satin Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Satin PLA",
+    "hex": "#9272C1",
+    "name": "Satin Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Satin PLA",
+    "hex": "#DA1521",
+    "name": "Satin Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Satin PLA",
+    "hex": "#F4C131",
+    "name": "Satin Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Satin PLA",
+    "hex": "#F5F0EC",
+    "name": "Satin White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Satin PLA",
+    "hex": "#FE9217",
+    "name": "Satin Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#23599A",
+    "name": "Silk Dark Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#363538",
+    "name": "Silk Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#4999C9",
+    "name": "Silk Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#4CC1CB",
+    "name": "Silk Light Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#55B687",
+    "name": "Silk Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#66C2B6",
+    "name": "Silk Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#676B6A",
+    "name": "Silk Gunmetal Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#768EC7",
+    "name": "Silk Periwinkle"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#786BB0",
+    "name": "Silk Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#7F865B",
+    "name": "Silk Peridot Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#85898B",
+    "name": "Silk Chrome"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#968162",
+    "name": "Silk Brass"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#AA538E",
+    "name": "Silk Magenta"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#AF6B4C",
+    "name": "Silk Bronze"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#BCC2C8",
+    "name": "Silk Silver"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#C1443F",
+    "name": "Silk Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#C49449",
+    "name": "Silk Gold"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#C4CF4C",
+    "name": "Silk Lime"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#CBB0B1",
+    "name": "Silk Rose Gold"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#CF6076",
+    "name": "Silk Rose"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#DBBBBB",
+    "name": "Silk Quartz Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#DFE4E4",
+    "name": "Silk White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#EB6232",
+    "name": "Silk Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#EEC810",
+    "name": "Silk Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Silk PLA",
+    "hex": "#FFA7C4",
+    "name": "Silk Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Translucent PLA",
+    "hex": "#08ABFB",
+    "name": "Translucent Cyan"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Translucent PLA",
+    "hex": "#9199A4",
+    "name": "Translucent Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Translucent PLA",
+    "hex": "#D93B90",
+    "name": "Translucent Magenta"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Panchroma\u2122 Translucent PLA",
+    "hex": "#F9ED3D",
+    "name": "Translucent Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyCast\u2122",
+    "hex": "#E9DFD3",
+    "name": "Natural"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyDissolve\u2122 S1 (PVA)",
+    "hex": "#E9DFD3",
+    "name": "Natural"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU90",
+    "hex": "#01ACBA",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU90",
+    "hex": "#16161A",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU90",
+    "hex": "#80837C",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU90",
+    "hex": "#DBD5D6",
+    "name": "Clear"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU90",
+    "hex": "#F0EBE8",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU95",
+    "hex": "#16161A",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU95",
+    "hex": "#338CC7",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU95",
+    "hex": "#EDA900",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU95",
+    "hex": "#F0EBE8",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU95",
+    "hex": "#F3442B",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU95",
+    "hex": "#F57517",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU95-HF",
+    "hex": "#16161A",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU95-HF",
+    "hex": "#DBD5D6",
+    "name": "Clear"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyFlex\u2122 TPU95-HF",
+    "hex": "#F0EBE8",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#003276",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#01ACBA",
+    "name": "Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#16161A",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#46394E",
+    "name": "Dark Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#474648",
+    "name": "Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#479161",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#6545A5",
+    "name": "Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#8C8D93",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#8EDBEB",
+    "name": "Light Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#BD6200",
+    "name": "Gold"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#C4D100",
+    "name": "Lime"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#EDA900",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#F0EBE8",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#F3442B",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#F57517",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#F7F5ED",
+    "name": "Natural"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 ABS",
+    "hex": "#FFA7C4",
+    "name": "Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 CosPLA",
+    "hex": "#A7A4A8",
+    "name": "Version A - Durability with extra sand-ability"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 CosPLA",
+    "hex": "#BCBABB",
+    "name": "Version B - Sand-ability with extra durability"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Galaxy ABS",
+    "hex": "#212721",
+    "name": "Galaxy Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Galaxy ABS",
+    "hex": "#2DCCD3",
+    "name": "Galaxy Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Galaxy ABS",
+    "hex": "#474648",
+    "name": "Galaxy Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Galaxy ABS",
+    "hex": "#6545A5",
+    "name": "Galaxy Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Galaxy ABS",
+    "hex": "#F57517",
+    "name": "Galaxy Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 LW-PLA",
+    "hex": "#2F2E30",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 LW-PLA",
+    "hex": "#94918D",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 LW-PLA",
+    "hex": "#A8754B",
+    "name": "Wood"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 LW-PLA",
+    "hex": "#BDD901",
+    "name": "Bright Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 LW-PLA",
+    "hex": "#D6001C",
+    "name": "Bright Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 LW-PLA",
+    "hex": "#EDD7BF",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 LW-PLA",
+    "hex": "#F07806",
+    "name": "Bright Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 LW-PLA",
+    "hex": "#F6BD01",
+    "name": "Bright Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Metallic ABS",
+    "hex": "#0D2441",
+    "name": "Metallic Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Metallic ABS",
+    "hex": "#3D441E",
+    "name": "Metallic Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Metallic PLA Pro",
+    "hex": "#0C0E0C",
+    "name": "Metallic Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Metallic PLA Pro",
+    "hex": "#2D3449",
+    "name": "Metallic Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Metallic PLA Pro",
+    "hex": "#434D43",
+    "name": "LM Sparkle Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Metallic PLA Pro",
+    "hex": "#505A5D",
+    "name": "Metallic Chrome"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Metallic PLA Pro",
+    "hex": "#743063",
+    "name": "Metallic Magenta"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Metallic PLA Pro",
+    "hex": "#8A8D95",
+    "name": "Silver"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Metallic PLA Pro",
+    "hex": "#8D352C",
+    "name": "Metallic Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Metallic PLA Pro",
+    "hex": "#A66301",
+    "name": "Gold"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Metallic PLA Pro",
+    "hex": "#AE6840",
+    "name": "Bronze"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Neon ABS",
+    "hex": "#77F0A2",
+    "name": "Neon Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Neon ABS",
+    "hex": "#F6162E",
+    "name": "Neon Magenta"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Neon ABS",
+    "hex": "#FE602B",
+    "name": "Neon Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Neon ABS",
+    "hex": "#FFC001",
+    "name": "Neon Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PC",
+    "hex": "#DAD5D4",
+    "name": "Transparent"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#0061D5",
+    "name": "Azure Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#013178",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#030305",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#30A45F",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#487BA2",
+    "name": "Stone Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#48B9C2",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#4B2A17",
+    "name": "Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#4C5F46",
+    "name": "Dark Gray Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#4E742D",
+    "name": "Jungle Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#5D5E63",
+    "name": "Steel Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#5EBDDB",
+    "name": "Aqua Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#6447A5",
+    "name": "Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#6E8393",
+    "name": "Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#8B8E96",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#948902",
+    "name": "Olive Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#A79565",
+    "name": "Olive Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#C2AB72",
+    "name": "Beige"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#D5D701",
+    "name": "Lime Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#D60212",
+    "name": "Wine Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#D90102",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#DDD7D3",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#DFD3C3",
+    "name": "Natural"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#EAECF5",
+    "name": "Cold White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#EED1A8",
+    "name": "Cream"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#EED230",
+    "name": "Lemon Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#F1A1AF",
+    "name": "Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#F24574",
+    "name": "Magenta"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#F36201",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA",
+    "hex": "#F3AA01",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#013276",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#022B33",
+    "name": "Blue-Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#161619",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#2C1C30",
+    "name": "Dark Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#31A45F",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#545859",
+    "name": "Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#5FC7CF",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#634232",
+    "name": "Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#6547A5",
+    "name": "Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#665A30",
+    "name": "Army Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#8D8E93",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#90785E",
+    "name": "3D Print General Flat Dark Earth"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#A8D4E8",
+    "name": "Light Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#C0DDA3",
+    "name": "Light Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#C28D5E",
+    "name": "Army Beige"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#D6D5DC",
+    "name": "Cold White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#DC605A",
+    "name": "Light Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#EBECED",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#ED2F20",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#EE92AA",
+    "name": "Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#EF2F64",
+    "name": "Magenta"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#F0AB01",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#F4DA78",
+    "name": "Light Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA Pro",
+    "hex": "#FE8E1B",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 PLA-CF",
+    "hex": "#302F31",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Translucent PETG",
+    "hex": "#005F2F",
+    "name": "Translucent Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Translucent PETG",
+    "hex": "#01062F",
+    "name": "Translucent Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Translucent PETG",
+    "hex": "#BE0017",
+    "name": "Translucent Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyLite\u2122 Translucent PETG",
+    "hex": "#DBD5D6",
+    "name": "Clear"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PC",
+    "hex": "#005DAB",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PC",
+    "hex": "#151518",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PC",
+    "hex": "#A5A5AB",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PC",
+    "hex": "#DA2A1E",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PC",
+    "hex": "#DCD7D5",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PETG",
+    "hex": "#181718",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PETG",
+    "hex": "#EFECEB",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#013178",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#161619",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#31A45F",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#4ABAC2",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#6647A3",
+    "name": "Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#8D8E93",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#90755D",
+    "name": "FDE Beige"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#EBECED",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#ED2F20",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#F02F63",
+    "name": "Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#F0AB01",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMax\u2122 PLA",
+    "hex": "#FE8E1B",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMide\u2122 CoPA",
+    "hex": "#161618",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolyMide\u2122 CoPA",
+    "hex": "#E8D795",
+    "name": "Natural"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#007ABC",
+    "name": "Electric Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#161619",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#4CA743",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#77D3DD",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#7DA1AA",
+    "name": "Slate Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#E8D9C3",
+    "name": "Transparent"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#EBD591",
+    "name": "Beige"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#F04B2A",
+    "name": "Coral Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#F3A196",
+    "name": "Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#F4EEE8",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#F5741B",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#F5BD00",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySmooth\u2122",
+    "hex": "#F5F0EC",
+    "name": "Snow White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySonic\u2122 PLA",
+    "hex": "#00307E",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySonic\u2122 PLA",
+    "hex": "#0C0E0C",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySonic\u2122 PLA",
+    "hex": "#2D9E59",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySonic\u2122 PLA",
+    "hex": "#50DAE4",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySonic\u2122 PLA",
+    "hex": "#6C5BB1",
+    "name": "Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySonic\u2122 PLA",
+    "hex": "#73767D",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySonic\u2122 PLA",
+    "hex": "#E2DEDB",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySonic\u2122 PLA",
+    "hex": "#E62216",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySonic\u2122 PLA",
+    "hex": "#F4C032",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySonic\u2122 PLA",
+    "hex": "#F97429",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySupport\u2122 for PA12",
+    "hex": "#ACE063",
+    "name": "GRASS GREEN"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "PolySupport\u2122 for PLA",
+    "hex": "#F6F1EC",
+    "name": "Pearl White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker PC-ABS",
+    "hex": "#181617",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker PC-ABS",
+    "hex": "#DDD6D4",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker Wood PLA",
+    "hex": "#A8754B",
+    "name": "Wood"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Max",
+    "hex": "#040403",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Max",
+    "hex": "#1B3373",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Max",
+    "hex": "#50A260",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Max",
+    "hex": "#C6CDD3",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Max",
+    "hex": "#EBECE9",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Max",
+    "hex": "#F53649",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Pro",
+    "hex": "#040403",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Pro",
+    "hex": "#1B3373",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Pro",
+    "hex": "#46DBD1",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Pro",
+    "hex": "#50A260",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Pro",
+    "hex": "#AD2723",
+    "name": "Voron Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Pro",
+    "hex": "#C6CDD3",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Pro",
+    "hex": "#EBECE9",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Pro",
+    "hex": "#F53649",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Pro",
+    "hex": "#FAD341",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ABS Pro",
+    "hex": "#FE9B42",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#003576",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#008DC3",
+    "name": "Pop Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#0094A4",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#161618",
+    "name": "Jet Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#17161A",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#2E784D",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#46394E",
+    "name": "Dark Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#48474A",
+    "name": "Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#4C5F46",
+    "name": "Dark Gray Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#5C5E31",
+    "name": "Army Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#5F4793",
+    "name": "Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#624234",
+    "name": "Army Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#77D730",
+    "name": "Pop Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#8D8E92",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#A79565",
+    "name": "Olive Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#D82B1C",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#D83076",
+    "name": "Pop Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#DBD7D6",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#DFD3C3",
+    "name": "Natural"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#EEC000",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 ASA",
+    "hex": "#F37716",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 Galaxy ASA",
+    "hex": "#012C61",
+    "name": "Galaxy Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 Galaxy ASA",
+    "hex": "#212721",
+    "name": "Galaxy Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 Galaxy ASA",
+    "hex": "#2E764C",
+    "name": "Galaxy Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 Galaxy ASA",
+    "hex": "#BF1A11",
+    "name": "Galaxy Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA",
+    "hex": "#05AF47",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA",
+    "hex": "#070707",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA",
+    "hex": "#0F5EA0",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA",
+    "hex": "#4D2D1C",
+    "name": "Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA",
+    "hex": "#5FCCB7",
+    "name": "Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA",
+    "hex": "#6C7477",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA",
+    "hex": "#AC0200",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA",
+    "hex": "#DC6E38",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA",
+    "hex": "#F0C940",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA",
+    "hex": "#F3F3F1",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA-GF",
+    "hex": "#084989",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA-GF",
+    "hex": "#18191B",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA-GF",
+    "hex": "#215966",
+    "name": "Power Tool Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA-GF",
+    "hex": "#61583C",
+    "name": "Army Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA-GF",
+    "hex": "#91999F",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA-GF",
+    "hex": "#CA4140",
+    "name": "Power Tool Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA-GF",
+    "hex": "#CECF45",
+    "name": "Power Tool Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA-GF",
+    "hex": "#EFF0EB",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 HT-PLA-GF",
+    "hex": "#F6B649",
+    "name": "Power Tool Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#0091A5",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#012C61",
+    "name": "Galaxy Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#070908",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#070908",
+    "name": "Galaxy Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#081B36",
+    "name": "Dark Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#1B3B99",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#1F1813",
+    "name": "Army Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#223622",
+    "name": "Dark Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#352A3B",
+    "name": "Dark Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#363D40",
+    "name": "Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#38B837",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#3E8CE4",
+    "name": "Electric Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#474648",
+    "name": "Galaxy Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#6947B8",
+    "name": "Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#707478",
+    "name": "Silver"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#74CABF",
+    "name": "Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#A7AEB2",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#A85D00",
+    "name": "Gold"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#BF1A11",
+    "name": "Galaxy Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#C23320",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#DBD5D6",
+    "name": "Clear"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#DC5D8C",
+    "name": "Magenta"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#DC7C40",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#F5BEE9",
+    "name": "Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#F8FAF8",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#F8FF6B",
+    "name": "Lime"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PETG",
+    "hex": "#FBE95C",
+    "name": "Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#0A0A0A",
+    "name": "Black"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#113B41",
+    "name": "Blue-Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#3145AD",
+    "name": "Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#434D43",
+    "name": "Metallic Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#564C6D",
+    "name": "Dark Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#5EC482",
+    "name": "Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#707674",
+    "name": "Dark Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#757330",
+    "name": "Army Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#7E5B45",
+    "name": "Brown"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#9381E6",
+    "name": "Purple"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#94F1F2",
+    "name": "Polymaker Teal"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#AEDE9C",
+    "name": "Light Green"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#B2DEEF",
+    "name": "Light Blue"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#CCD3DE",
+    "name": "Grey"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#D0B082",
+    "name": "Army Beige"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#D9DAE0",
+    "name": "Cold White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#EEE96F",
+    "name": "Light Yellow"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#EF6063",
+    "name": "Light Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#F2BDD0",
+    "name": "Pink"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#FAFAFA",
+    "name": "White"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#FB3D7C",
+    "name": "Magenta"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#FF4747",
+    "name": "Red"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#FF9757",
+    "name": "Orange"
+  },
+  {
+    "vendor": "polymaker",
+    "type": "Polymaker\u2122 PLA Pro",
+    "hex": "#FFEA4D",
+    "name": "Yellow"
+  }
+]
