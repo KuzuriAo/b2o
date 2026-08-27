@@ -18,9 +18,16 @@
   ],
   "author": "Kuzuri",
   "homepage": "https://b2o.kuzuriao.com/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KuzuriAo/b2o.git"
+  },
   "funding": {
     "type": "ko-fi",
     "url": "https://ko-fi.com/b2o"
+  },
+  "engines": {
+    "node": ">=18.17"
   },
   "files": [
     "dist"
@@ -36,7 +43,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "undici": "^8.10.0",
+    "undici": "^6.28.0",
     "fflate": "^0.8.2"
   },
   "devDependencies": {
@@ -45,9 +52,5 @@
     "typescript": "^5.9.3",
     "vitest": "^3.2.4",
     "zod": "^3.25.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KuzuriAo/b2o.git"
   }
 }
