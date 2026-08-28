@@ -35,7 +35,7 @@ Converts one or more local `.3mf` files. A file that's actually a zip bundling s
 |------------------------------------|---|
 | `--profile <id>` | Force a specific profile instead of auto-detecting (run `b2o profiles` for valid ids) |
 | `--filament-compliance <mode>` | `generic` or `snapmaker`: relabel filament identity for marketplace-compliance uploads (mirrors the web UI's filament brand picker). Identity only, never touches tuned physical properties (temps, retraction, flow); omit to keep the source file's original filament brand untouched |
-| `--out-dir <dir>` | Write outputs to this directory instead of alongside each input |
+| `--out-dir <dir>` | Write outputs to this directory instead of alongside each input. Must already exist; unlike `--archive-dir`, it's not created automatically |
 | `--suffix <text>` | Output filename suffix, default `_U1` (pass `""` to remove it; refused if that would overwrite the input) |
 | `--skip-existing` | Skip a file entirely (no network call) if its output already exists, for resuming an interrupted batch. Off by default: a normal run always overwrites, same as re-running a build |
 | `--watch` | Watch a directory for new `.3mf`/`.zip` files and convert each as it appears, running until Ctrl+C. Pass exactly one existing folder in place of `<files...>` above. Requires `--out-dir` pointing somewhere other than the watched folder, otherwise a freshly written output would get picked up as a "new" input on the next poll |
@@ -58,11 +58,13 @@ b2o convert ./exports --watch --out-dir ./converted   # convert new files as the
 
 #### Processing a folder repeatedly (`--watch` or cron)
 
-`--watch` isn't the only way to process a folder over time; everything below works identically from a plain (non-watch) `convert` call too, e.g. one triggered periodically by cron:
+`--watch` isn't the only way to process a folder over time. A plain (non-watch) `convert` call uses all the same archive-dir/state-file mechanics; the one real difference is that it needs actual file paths, not a bare directory the way `--watch` accepts one, so a shell glob does the job instead. A cron job is the common way to trigger this on a schedule:
 
 ```bash
-*/5 * * * *  b2o convert ./exports --archive-dir ./exports/done --out-dir ./converted --log-file ./b2o.log --quiet
+*/5 * * * *  b2o convert ./exports/*.3mf ./exports/*.zip --archive-dir ./exports/done --out-dir ./converted --log-file ./b2o.log --quiet
 ```
+
+If a given run finds no `.3mf` or no `.zip` files, that pattern gets passed through unexpanded and logged as a harmless "file not found" for that run; not something to worry about, just what an empty match looks like in the log.
 
 Whenever `--watch`, `--archive-dir`, or `--skip-existing` is set (`--dry-run` is always exempt, since it never has side effects to track), a small state file (`<out-dir or default dir>/.b2o-state.json`) records, per input, whether it fully succeeded or failed with a non-retryable error. It's keyed by name, size, **and modification time** together, so even a same-size content edit (e.g. fixing a typo in a plate name) is correctly seen as changed, not skipped. A non-retryable failure (a corrupt file, or the API rejecting the request itself) is skipped on future runs without retrying it forever; a transient one (the network being down, the server erroring, a rate limit) is always retried next time.
 
@@ -84,7 +86,7 @@ b2o convert /var/uploads/incoming \
 Or the same thing on a schedule instead of a long-running process:
 
 ```bash
-*/5 * * * *  b2o convert /var/uploads/incoming --archive-dir /var/uploads/incoming/done --out-dir /var/uploads/converted --log-file /var/log/b2o.log --quiet
+*/5 * * * *  b2o convert /var/uploads/incoming/*.3mf /var/uploads/incoming/*.zip --archive-dir /var/uploads/incoming/done --out-dir /var/uploads/converted --log-file /var/log/b2o.log --quiet
 ```
 
 What makes this safe to leave running unattended, not just technically possible:

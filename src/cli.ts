@@ -113,7 +113,7 @@ Options:
 ${formatOptions([
   ["--profile <id>", 'Force a specific profile instead of auto-detecting (run "b2o profiles" to find a valid id)'],
   ["--filament-compliance <mode>", '"generic" or "snapmaker" -- relabel filament identity for marketplace-compliance uploads (e.g. Snapmaker Space, space.snapmaker.com). Identity only: never changes temps, retraction, flow, or other tuned physical properties. Omit to keep the source file\'s original filament brand/preset names untouched.'],
-  ["--out-dir <dir>", "Write outputs to this directory instead of alongside each input"],
+  ["--out-dir <dir>", "Write outputs to this directory instead of alongside each input. Must already exist -- unlike --archive-dir, it's not created automatically"],
   ["--suffix <text>", 'Output filename suffix (default: "_U1"; pass "" to remove it -- refused if that would make the output path identical to the input file)'],
   ["--skip-existing", "Skip a file entirely (no network call) if its output already exists -- for resuming an interrupted batch. Off by default: a normal run always overwrites, same as re-running a build"],
   ["--watch", 'Watch a directory for new .3mf/.zip files and convert each as it appears, running until Ctrl+C. Pass exactly one existing folder in place of <files...> above. Requires --out-dir pointing somewhere other than the watched folder'],
@@ -141,10 +141,17 @@ the one being watched -- otherwise a freshly written output would get
 picked up as a "new" input on the next poll, converting its own output
 forever.
 
---watch isn't the only way to process a folder repeatedly -- everything
-below works identically from a plain (non-watch) convert call too, e.g.
-one triggered periodically by cron:
-  */5 * * * *  b2o convert ./exports --archive-dir ./exports/done --out-dir ./converted --log-file ./b2o.log --quiet
+--watch isn't the only way to process a folder repeatedly -- a plain
+(non-watch) convert call uses all the same archive-dir/state-file
+mechanics. The one real difference: it needs actual file paths, not a
+bare directory the way --watch accepts one, so a shell glob does the
+job instead. A cron job is the common way to trigger this on a
+schedule:
+  */5 * * * *  b2o convert ./exports/*.3mf ./exports/*.zip --archive-dir ./exports/done --out-dir ./converted --log-file ./b2o.log --quiet
+(--out-dir has to already exist; --archive-dir creates itself if it
+doesn't. If a run finds no .3mf or no .zip files, that pattern is
+passed through unexpanded and logged as a harmless "file not found"
+for that run -- not something to worry about.)
 
 Whenever --watch, --archive-dir, or --skip-existing is set (--dry-run
 never has side effects to track, so it's exempt), a small state file
