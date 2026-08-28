@@ -1,6 +1,6 @@
 # b2o
 
-Convert Bambu Studio `.3mf` files to Snapmaker U1 / OrcaSlicer format from the command line.
+Convert Bambu Studio, Creality Print, and Anycubic Slicer Next `.3mf` files to Snapmaker U1 / OrcaSlicer format from the command line.
 
 This is the CLI counterpart to [bambu2orca](https://b2o.kuzuriao.com) — same conversion pipeline, same zero-mesh-upload guarantee, but scriptable instead of drag-and-drop. Only a small settings JSON (a few hundred slicer key/value pairs, plus bounding boxes) ever leaves your machine — **never** the 3D mesh geometry. That's not a policy promise, it's structural: run `--dry-run` on any file and see exactly what would be sent, with a byte count confirming zero mesh bytes, before you ever run it for real.
 

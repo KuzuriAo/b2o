@@ -49,4 +49,31 @@ describe("pickProfile", () => {
   it("returns null when there are no candidates at all", () => {
     expect(pickProfile([], { layerHeight: 0.08, tierName: "Extra Fine" })).toBeNull();
   });
+
+  // Confirmed on a real Creality Print export: its own "0.12mm Standard"
+  // tier collides by name with Snapmaker's own "Standard" tier, which is
+  // actually 0.20mm -- a cross-vendor coincidence, not the same tier.
+  it("rejects a tier-name match when a name-agnostic candidate is a much closer layer-height fit (cross-vendor naming collision)", () => {
+    const crossVendorCollision: TierAwareProfileCandidate[] = [
+      { id: "snapmaker-0.12fin", layerHeight: 0.12, tierName: "Fine", autoSelectable: true },
+      { id: "snapmaker-0.20standard", layerHeight: 0.2, tierName: "Standard", autoSelectable: true },
+    ];
+    expect(pickProfile(crossVendorCollision, { layerHeight: 0.12, tierName: "Standard" })).toEqual({
+      profileId: "snapmaker-0.12fin",
+      exact: true,
+      matchedByTierName: false,
+    });
+  });
+
+  it("still trusts a tier-name match that's an equally close (or closer) layer-height fit than any alternative", () => {
+    const genuineMatch: TierAwareProfileCandidate[] = [
+      { id: "snapmaker-0.12fin", layerHeight: 0.12, tierName: "Fine", autoSelectable: true },
+      { id: "snapmaker-0.20standard", layerHeight: 0.2, tierName: "Standard", autoSelectable: true },
+    ];
+    expect(pickProfile(genuineMatch, { layerHeight: 0.12, tierName: "Fine" })).toEqual({
+      profileId: "snapmaker-0.12fin",
+      exact: true,
+      matchedByTierName: true,
+    });
+  });
 });

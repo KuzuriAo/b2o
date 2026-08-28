@@ -22,7 +22,7 @@ function formatOptions(entries: [flag: string, description: string][]): string {
   );
 }
 
-const TOP_LEVEL_HELP = `b2o -- convert Bambu Studio .3mf files to Snapmaker U1 / OrcaSlicer format from the command line.
+const TOP_LEVEL_HELP = `b2o -- convert Bambu Studio, Creality Print, and Anycubic Slicer Next .3mf files to Snapmaker U1 / OrcaSlicer format from the command line.
 
 Usage: b2o <command> [options]
 

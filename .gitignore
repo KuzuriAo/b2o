@@ -1,3 +1,10 @@
 node_modules/
 dist/
 *.b2o-payload.json
+# Real (often licensed) source 3mfs used for local testing -- never commit,
+# especially in a public repo. See src/fixtures/ for the tiny synthetic
+# fixtures that are deliberately committed instead.
+*.3mf
+!src/fixtures/synthetic-2plate.3mf
+!src/fixtures/synthetic-creality.3mf
+!src/fixtures/synthetic-anycubic.3mf

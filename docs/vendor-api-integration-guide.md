@@ -173,7 +173,7 @@ Only reach for "Calling the API directly" below if you're not in a position to d
 
 ### Step 1: Extract the request payload from your source `.3mf`
 
-A Bambu Studio `.3mf` is a zip. You need two things out of it:
+A Bambu Studio, Creality Print, or Anycubic Slicer Next `.3mf` is a zip -- all three share the same underlying format (Creality Print and Anycubic Slicer Next are both recent OrcaSlicer-lineage forks). You need two things out of it:
 1. `Metadata/project_settings.config`, parsed as JSON, sent verbatim as `projectSettings`.
 2. Each top-level object's plate assignment and world-space bounding box (or fallback translation), sent as `objects`.
 

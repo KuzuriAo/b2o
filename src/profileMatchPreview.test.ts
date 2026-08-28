@@ -51,9 +51,13 @@ describe("previewProfileMatch", () => {
     expect(result.nozzleDiameter).toBe("0.4"); // diameter itself was still detected
   });
 
-  it("prefers a tier-name match over the nearest layer height", async () => {
+  it("prefers a tier-name match over the nearest layer height when they tie", async () => {
+    // Mirrors the real catalog: "0.20 Strength" and "0.20 Standard" sit at
+    // the identical 0.20mm layer height (see profileCatalog.ts's
+    // snapmaker-u1-0.4-0.20str) -- layer height alone can't tell them
+    // apart, only the source's own tier name can.
     vi.mocked(listProfiles).mockResolvedValue({
-      profiles: [makeProfile({ id: "near-by-height", layerHeight: 0.2, tierName: "Standard" }), makeProfile({ id: "by-name", layerHeight: 0.24, tierName: "Strength" })],
+      profiles: [makeProfile({ id: "near-by-height", layerHeight: 0.2, tierName: "Standard" }), makeProfile({ id: "by-name", layerHeight: 0.2, tierName: "Strength" })],
     });
     const result = await previewProfileMatch(
       { nozzle_diameter: "0.4", layer_height: "0.2", print_settings_id: "0.20mm Strength @BBL X1C" },
@@ -61,5 +65,20 @@ describe("previewProfileMatch", () => {
     );
     expect(result.profileId).toBe("by-name");
     expect(result.matchSource).toBe("auto-tier-name");
+  });
+
+  it("rejects a tier-name match when it's a meaningfully worse layer-height fit than the nearest alternative", async () => {
+    // Confirmed on a real Creality Print export: its own "Standard" tier
+    // was 0.12mm, but Snapmaker's own "Standard" tier is 0.20mm -- the
+    // shared word is a cross-vendor coincidence, not the same tier.
+    vi.mocked(listProfiles).mockResolvedValue({
+      profiles: [makeProfile({ id: "snapmaker-0.12fin", layerHeight: 0.12, tierName: "Fine" }), makeProfile({ id: "snapmaker-0.20standard", layerHeight: 0.2, tierName: "Standard" })],
+    });
+    const result = await previewProfileMatch(
+      { nozzle_diameter: "0.4", layer_height: "0.12", print_settings_id: "0.12mm Standard @Creality K2 Plus 0.4 nozzle" },
+      "http://localhost:8787",
+    );
+    expect(result.profileId).toBe("snapmaker-0.12fin");
+    expect(result.matchedByTierName).toBe(false);
   });
 });
