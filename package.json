@@ -1,7 +1,7 @@
 {
   "name": "@kuzuri.ao/b2o",
   "private": false,
-  "version": "0.0.7",
+  "version": "0.0.8",
   "type": "module",
   "description": "Convert Bambu Studio, Creality Print, and Anycubic Slicer Next .3mf files to Snapmaker U1 / OrcaSlicer format from the command line.",
   "license": "MIT",
