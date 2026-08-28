@@ -116,7 +116,7 @@ ${formatOptions([
   ["--out-dir <dir>", "Write outputs to this directory instead of alongside each input"],
   ["--suffix <text>", 'Output filename suffix (default: "_U1"; pass "" to remove it -- refused if that would make the output path identical to the input file)'],
   ["--skip-existing", "Skip a file entirely (no network call) if its output already exists -- for resuming an interrupted batch. Off by default: a normal run always overwrites, same as re-running a build"],
-  ["--watch", 'Watch <files...> (must be exactly one existing folder) for new .3mf/.zip files and convert each as it appears, running until Ctrl+C. Requires --out-dir pointing somewhere other than the watched folder'],
+  ["--watch", 'Watch a directory for new .3mf/.zip files and convert each as it appears, running until Ctrl+C. Pass exactly one existing folder in place of <files...> above. Requires --out-dir pointing somewhere other than the watched folder'],
   ["--archive-dir <dir>", "After a file fully converts, move the original there (collision-safe, atomic where possible). The recommended way to keep a watched/cron-processed folder from ever needing to be rescanned -- see below"],
   ["--log-file <path>", "Append every log/error line (timestamped) to this file, in addition to stdout/stderr"],
   ["--quiet", "Suppress stdout/stderr entirely. Requires --log-file -- refused otherwise, so an error never has nowhere to go"],
