@@ -12,8 +12,8 @@ import { z } from "zod";
 
 /** A single top-level object's plate assignment and computed bounding box. */
 export const ConvertObjectSchema = z.object({
-  id: z.string(),
-  name: z.string().optional(),
+  id: z.string().max(128),
+  name: z.string().max(500).optional(),
   sequence: z.number().int().optional(),
   isAssembly: z.boolean().optional(),
   /** Omitted for objects with no plate metadata (matches the Python script's `__unassigned_` handling). */
@@ -25,13 +25,27 @@ export const ConvertObjectSchema = z.object({
 });
 export type ConvertObject = z.infer<typeof ConvertObjectSchema>;
 
-/** A parsed Metadata/project_settings.config JSON blob — deliberately untyped-by-key (hundreds of slicer settings). */
-export const ProjectSettingsSchema = z.record(z.string(), z.unknown());
+/**
+ * A parsed Metadata/project_settings.config JSON blob — deliberately
+ * untyped-by-key (hundreds of real slicer settings). Since /v1/convert is
+ * reachable by anyone who runs the published b2o CLI (or calls the API
+ * directly) with no assumption of good faith, this stays open-shaped but
+ * gets a hard cap on its own serialized size -- a real project_settings.config
+ * runs tens to a few hundred KB; 2MB is generous headroom above any
+ * legitimate file while still bounding a single request's worst-case
+ * parsing/processing cost.
+ */
+const MAX_PROJECT_SETTINGS_BYTES = 2 * 1024 * 1024;
+export const ProjectSettingsSchema = z.record(z.string(), z.unknown()).refine(
+  (settings) => JSON.stringify(settings).length <= MAX_PROJECT_SETTINGS_BYTES,
+  { message: `projectSettings exceeds the ${MAX_PROJECT_SETTINGS_BYTES} byte limit` },
+);
 export type ProjectSettings = z.infer<typeof ProjectSettingsSchema>;
 
 export const ConvertRequestSchema = z.object({
   projectSettings: ProjectSettingsSchema,
-  objects: z.array(ConvertObjectSchema),
+  /** 1000 is far past any real multi-plate 3MF project's object count -- bounds worst-case request cost, not a realistic ceiling. */
+  objects: z.array(ConvertObjectSchema).max(1000),
   /** Defaults to 'snapmaker-u1-0.4-standard' server-side if omitted. See D1 schema section 2 of the implementation plan. */
   profileId: z.string().optional(),
   /**
@@ -211,3 +225,37 @@ export const ApiKeyRequestSchema = z.object({
   email: z.string().email(),
 });
 export type ApiKeyRequest = z.infer<typeof ApiKeyRequestSchema>;
+
+/**
+ * POST /v1/ui-event body -- anonymous, aggregate-only UI-interaction
+ * telemetry (see services/uiEventAnalytics.ts): the Partner Integration
+ * Selector's copy-to-clipboard actions, plus test_manifest_demo/
+ * test_postmessage_demo (fired the moment either "Test Live..." button
+ * is clicked, separate from whether the resulting conversion actually
+ * completes -- both demo buttons land in the SAME rateLimitTier:
+ * "demo_exact" bucket in the conversion analytics with nothing
+ * distinguishing which mechanism fired, so this is the only place that
+ * split is visible at all; also gives a real "clicked" signal
+ * independent of "conversion completed," useful if one mechanism is
+ * silently failing partway through). A fixed enum, never an arbitrary
+ * caller-supplied string -- this stays a closed, reviewable set of
+ * known events, not an open telemetry sink.
+ */
+export const UI_EVENT_NAMES = [
+  "copy_agent_prompt",
+  "copy_manifest_code",
+  "copy_handoff_code",
+  "copy_ref_link",
+  "test_manifest_demo",
+  "test_postmessage_demo",
+] as const;
+export const UiEventSchema = z.object({
+  event: z.enum(UI_EVENT_NAMES),
+  /** Same slug-shaped optional referrer as ConvertRequestSchema's -- lets "which partner site's visitor copied this" be visible without being per-visitor. */
+  referrer: z
+    .string()
+    .max(64)
+    .regex(/^[a-zA-Z0-9_-]+$/)
+    .optional(),
+});
+export type UiEvent = z.infer<typeof UiEventSchema>;

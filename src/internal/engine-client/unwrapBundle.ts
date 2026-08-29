@@ -1,5 +1,5 @@
-import { unzipSync } from "fflate";
 import { PROJECT_SETTINGS_PATH } from "./paths.js";
+import { safeUnzipSync } from "./safeUnzip.js";
 
 export interface BundleEntry {
   /** Display/output filename -- the entry's own basename, directory prefixes stripped. */
@@ -28,8 +28,12 @@ export interface BundleEntry {
 export function unwrapIfBundle(fileBytes: Uint8Array): BundleEntry[] | null {
   let entries: Record<string, Uint8Array>;
   try {
-    entries = unzipSync(fileBytes);
+    entries = safeUnzipSync(fileBytes);
   } catch {
+    // Corrupt/non-zip bytes, or a decompression-bomb-shaped entry rejected
+    // by safeUnzipSync -- either way, fall through and let
+    // prepareConvertRequest's own safeUnzipSync call raise the real,
+    // specific error against these same bytes treated as a plain 3MF.
     return null;
   }
 

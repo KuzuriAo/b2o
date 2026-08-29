@@ -1,4 +1,4 @@
-import { unzipSync, zipSync } from "fflate";
+import { zipSync } from "fflate";
 import type { ConvertObject, ConvertRequest, ConvertResponse } from "../shared/index.js";
 import { adaptModelSettings } from "./adaptModelSettings.js";
 import { addOrcaSlicerMetadata } from "./addOrcaSlicerMetadata.js";
@@ -9,6 +9,7 @@ import { parseObjectMetadata } from "./parseObjectMetadata.js";
 import { parsePlateAssignments } from "./parsePlateAssignments.js";
 import { recenterAssembleItems } from "./recenterAssembleItems.js";
 import { recenterBuildItems } from "./recenterBuildItems.js";
+import { safeUnzipSync } from "./safeUnzip.js";
 import { shouldDropFromBambu } from "./shouldDropFromBambu.js";
 import { tolerantJsonParse } from "./tolerantJsonParse.js";
 
@@ -32,7 +33,7 @@ export interface ParsedBambuProject {
  * fallback when mesh geometry is missing), its plate assignment, and its name.
  */
 export function prepareConvertRequest(fileBytes: Uint8Array): ParsedBambuProject {
-  const zipEntries = unzipSync(fileBytes);
+  const zipEntries = safeUnzipSync(fileBytes);
   const warnings: string[] = [];
 
   const projectSettingsBytes = zipEntries[PROJECT_SETTINGS_PATH];
