@@ -75,7 +75,7 @@ export const ConvertRequestSchema = z.object({
    * docs/partner-handoff-integration-guide.md) -- lets the site owner see
    * which creator sites are actually driving conversions. Purely a
    * "who sent this session" tag, unrelated to the file/mesh itself, so it
-   * doesn't touch the Zero-Upload Guarantee. Restricted to a short
+   * doesn't touch the Zero-Model Upload Guarantee. Restricted to a short
    * slug-shaped string (no free text) since it flows straight into
    * analytics without further sanitization.
    */

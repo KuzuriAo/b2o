@@ -2,17 +2,17 @@
 
 **Audience:** developers (human or AI agent) integrating bambu2orca into a web stack — the complete reference, from a zero-backend visitor-facing button through to a fully automated, API-key-authenticated publish workflow.
 
-**Scope:** this document is self-contained end-to-end for both real integration paths — the visitor-facing browser handoff (no backend, no API key) and the server-to-server API (authenticated, automated). Start at "Which integration fits your web stack?" below to pick a path, or read straight through if you're not sure yet. The browser handoff also has its own lighter, standalone write-up at the [Partner Handoff Integration Guide](./partner-handoff-integration-guide.md) — same mechanism, useful if you only need that piece and want to hand a shorter doc to a frontend-only team; that file is the canonical source if the two ever disagree.
+**Scope:** this document is self-contained end-to-end for every real integration path — the visitor-facing browser handoff (no backend, no API key), the server-to-server API (authenticated, automated), and the hybrid split where your browser does the zip work and your own server just holds the key. Start at "Which integration fits your web stack?" below to pick a path, or read straight through if you're not sure yet. The browser handoff also has its own lighter, standalone write-up at the [Partner Handoff Integration Guide](./partner-handoff-integration-guide.md) — same mechanism, useful if you only need that piece and want to hand a shorter doc to a frontend-only team; that file is the canonical source if the two ever disagree.
 
-If you're an AI agent implementing an integration from this document: every request/response shape and code sample below is copy-pasteable, not paraphrased — use it verbatim. The fastest paths to a working integration, depending on which shape you're building: the visitor-facing handoff needs no code at all beyond a link/postMessage call (see "The visitor-facing handoff, in full" below); for the server-side path, "Fastest path: shell out to the CLI" needs zero HTTP/zip code, and "Calling the API directly" → Step 2 has the full request/response schema if you need to call the API without depending on `b2o` at all.
+If you're an AI agent implementing an integration from this document: every request/response shape and code sample below is copy-pasteable, not paraphrased — use it verbatim. The fastest paths to a working integration, depending on which shape you're building: the visitor-facing handoff needs no code at all beyond a link/postMessage call (see "The visitor-facing handoff, in full" below); for the server-side path, "Fastest path: shell out to the CLI" needs zero HTTP/zip code, and "Calling the API directly" → Step 2 has the full request/response schema if you need to call the API without depending on `b2o` at all; for the browser+your-server split, see option 4 below.
 
-If you were handed an [AI Agent Integration Brief](./ai-agent-integration-brief.md) alongside this document, start there instead — it's the decision-and-action layer that tells you how to investigate your own codebase and pick between the three shapes above, then points back here for the technical detail once you know which one you're building.
+If you were handed an [AI Agent Integration Brief](./ai-agent-integration-brief.md) alongside this document, start there instead — it's the decision-and-action layer that tells you how to investigate your own codebase and pick between the four shapes above, then points back here for the technical detail once you know which one you're building.
 
 ---
 
 ## Which integration fits your web stack?
 
-Three real shapes, depending on where in your stack the conversion should actually happen. Pick based on *who* triggers it and *where* the file already lives, not on what feels simplest to wire up first.
+Four real shapes, depending on where in your stack the conversion should actually happen. Pick based on *who* triggers it and *where* the file already lives, not on what feels simplest to wire up first.
 
 ### 1. A visitor-facing button — no backend integration at all
 
@@ -38,6 +38,50 @@ Two things worth designing around, since they follow from how the underlying pip
 - **Track per-model completion so a regenerate can resume, not restart.** If your own backend loop logs which models it's already redone in the current run, an interrupted batch (a deploy, a timeout, a crash) picks back up instead of re-spending quota on models that already succeeded. The `b2o` CLI's own `--skip-existing` flag is the same idea applied to local files, if a concrete reference helps.
 
 If you build something worth sharing back — even just describing the shape of it — that's real signal for whether a shared component would ever be worth building for real. Nothing about using bambu2orca depends on that happening, though.
+
+### 4. Your browser does the zip work, your server holds the key
+
+The shape that doesn't fit cleanly into "visitor-facing, no backend" or "server-side automation" above, but is the only one of the four that scales when files get large: your *own* server never touches mesh bytes, but it does hold the API key and make the authenticated call — the browser does the unzip/rebuild work, your server is purely a thin, key-holding proxy in between. This is exactly what bambu2orca's own web app does internally, just with your server standing in for our Worker.
+
+Why this is worth its own shape rather than being "shape 2 with extra steps": shape 2's server-side paths (shelling out to the CLI, calling `runConvert()`, or hitting `/v1/convert` directly from your server) all assume the *file* reaches your server somehow — disk path, uploaded buffer, whatever. For a catalog of large files (tens to low hundreds of MB, not unusual for detailed multi-part models), that means pulling each one out of storage into your server/serverless function just to hand it straight back out again after conversion, for zero benefit — the visitor's browser already has the bytes in hand from a file picker or your own site's existing storage fetch. On a platform with a constrained `/tmp` (Vercel's serverless functions cap out around 512MB, shared across the whole invocation), a handful of large files in flight can matter; it also burns real egress moving mesh data through your infrastructure for a step that never needed to see it.
+
+The fix: do the zip work in the browser instead, where the bytes already are.
+
+```ts
+// Browser: unzip in memory, build the small settings-only request. No node:*
+// builtins, no undici — safe in a bundle, safe off the main thread in a
+// Web Worker for a large file.
+import { prepareConvertRequest, applyConvertResponse } from "@kuzuri.ao/b2o/engine";
+
+const parsed = prepareConvertRequest(fileBytes);
+
+// POST just parsed.request (small JSON, never mesh data) to YOUR server route.
+const response = await fetch("/api/convert-u1", {
+  method: "POST",
+  body: JSON.stringify(parsed.request),
+}).then((r) => r.json());
+
+// Browser: reassemble the final downloadable file from the response.
+const outputBytes = applyConvertResponse(parsed, response);
+```
+
+```ts
+// Your server route (Next.js Route Handler, or equivalent): holds the API
+// key, makes the one authenticated call, nothing else. Never sees mesh
+// bytes -- the request body here is the same small JSON `runConvert()`
+// would build from a local file, just arriving over the wire instead.
+import { convert } from "@kuzuri.ao/b2o";
+
+export async function POST(req: Request) {
+  const convertRequest = await req.json();
+  const response = await convert(convertRequest, process.env.B2O_API_KEY!);
+  return Response.json(response);
+}
+```
+
+Mesh geometry never leaves the visitor's browser tab in either direction — your server forwards a settings-only JSON payload through and a settings-only JSON payload back, the same zero-mesh-upload guarantee bambu2orca's own web app makes, just with your infrastructure standing in the middle instead of ours. File size stops being a server-side concern at all: a 150MB source costs your `/api/convert-u1` route nothing beyond forwarding a request body a few hundred KB in size.
+
+Full reference for the browser-side half: [`@kuzuri.ao/b2o`'s README, "Browser-side use"](https://github.com/KuzuriAo/b2o#browser-side-use-kuzuriaob2oengine). The server-side half is exactly "Calling the API directly" → Step 2 below, or `convert()` from "Fastest path," just receiving its request body from your own browser code instead of building it from a local file.
 
 ---
 

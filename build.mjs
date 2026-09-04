@@ -37,3 +37,22 @@ await build({
   ...shared,
   entryPoints: { index: "src/index.ts" },
 });
+
+// Browser-safe subpath (`b2o/engine`, see src/engine.ts's own header for
+// why this needs to be a separate entrypoint, not just a re-export from
+// index.ts): platform "browser", not "node" -- unlike `shared` above,
+// this is a real behavioral difference, not just a label. esbuild
+// resolves `node:*` specifiers differently per platform and, critically,
+// FAILS THE BUILD outright if this graph ever accidentally reaches one
+// (import { X } from "engine-client" pulling in something that
+// transitively imports node:fs, for instance) instead of silently
+// bundling a Node-only module into something that'll break in a
+// browser. That hard failure is the actual safety net here, not a
+// formality -- keep this platform setting even if it never seems to
+// matter locally.
+await build({
+  ...shared,
+  platform: "browser",
+  external: [],
+  entryPoints: { engine: "src/engine.ts" },
+});

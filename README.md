@@ -131,6 +131,34 @@ Everything here also works as a direct HTTP API call: no server to stand up, no 
 - **[Vendor API Integration Guide](./docs/vendor-api-integration-guide.md)**: the full technical reference, covering request/response schemas, auth, rate limits, error codes, and the three ways to integrate (a visitor-facing handoff needing no API key at all, server-side automation, or your own admin UI).
 - **[AI Agent Integration Brief](./docs/ai-agent-integration-brief.md)**: written to be handed directly to a coding agent (Claude Code or similar) working in your own site's codebase, alongside the guide above. It's the decision-and-action layer: investigate your own codebase, pick the integration shape that actually fits, then implement.
 
+## Browser-side use (`@kuzuri.ao/b2o/engine`)
+
+If your integration already has the `.3mf` bytes in the visitor's browser (a file picker, drag-and-drop) and you don't want to round-trip potentially large files through your own server just to hand them to this package's `convert()`, import the `/engine` subpath instead of the package root:
+
+```ts
+import { prepareConvertRequest, applyConvertResponse } from "@kuzuri.ao/b2o/engine";
+
+// In the browser: unzip the .3mf in memory and build the small settings-only request.
+const parsed = prepareConvertRequest(fileBytes); // Uint8Array in, no network call
+
+// POST parsed.request (a few hundred KB of JSON at most, never mesh data) to
+// your OWN server route -- that's where your API key lives and where the
+// real call to this package's convert() happens, not in the browser.
+const response = await fetch("/api/convert", {
+  method: "POST",
+  body: JSON.stringify(parsed.request),
+}).then((r) => r.json());
+
+// Back in the browser: stitch the response into the final downloadable file.
+const outputBytes = applyConvertResponse(parsed, response);
+```
+
+This is the same client/server split bambu2orca's own web app uses, just with your server standing in for bambu2orca's Worker as the key-holding proxy. Mesh geometry never leaves the visitor's browser tab in either direction, `/tmp` never enters the picture, and file size stops being a server-side concern — a 150MB source file costs your server nothing beyond forwarding a small JSON payload.
+
+**`/engine` has no `node:*` builtins, no `undici`, and deliberately no `convert()`/`requestApiKey()`** — those stay in the package root, which is Node-only by design (the API key belongs on a server, never in a browser bundle). `/engine` re-exports the full `engine-client` surface used internally here, not just the two functions above — `unwrapIfBundle` (for a zip bundling several `.3mf`s, handled client-side), `lookupFilamentColorName`, `objectWorldBboxXY`, and the rest — plus the `ConvertRequest`/`ConvertResponse`/`ProfileSummary`/etc. types (type-only, erased at build) for typing both sides of your own proxy route against the real contract.
+
+**Web Worker-safe**, confirmed directly against the source, not assumed: nothing in `/engine` touches `document`/`window`/`navigator`/the DOM. Unzipping and bounding-box math on a large mesh can run entirely off the main thread.
+
 ## API keys & quotas
 
 | Tier | Daily quota | How to get it |
