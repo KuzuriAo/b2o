@@ -233,6 +233,14 @@ Content-Type: application/json
 
 Full request schema:
 
+> **Before you touch `filamentComplianceMode`: for almost every integration, the right move is to not set it, and not build any UI for it.** Its only real purpose is a narrow one — declaring Generic or Snapmaker-brand filament instead of the source's real brand, specifically because some marketplaces (Snapmaker Space is the actual named case) require that on upload. If your integration's output is something a visitor downloads to print at home, or something that feeds your own catalog/publish pipeline, that scenario never applies — the source project's own real filament identity (whatever the creator actually tuned) is what the person converting almost always wants, not a relabeled generic one.
+>
+> Two acceptable patterns, in order of preference:
+> - **(A) Don't expose the choice at all.** Never set `filamentComplianceMode`. This is the default and should be the default for most integrations — one fewer control for a visitor to parse, and no chance of quietly discarding the exact thing they actually wanted (the real creator's filament choices).
+> - **(B) Default to omitted ("Original"), and add the option only if you have a specific reason to.** A "specific reason" means your own site *also* deals in the kind of redistribution that needs a declared-brand identity — not "the API supports it, so let's expose it." If you're not sure which case you're in, you're in the case that wants (A).
+>
+> What this is not: a three-way enum choice where "Generic"/"Snapmaker" are two options and the third (the source's real identity, what omitting the field produces) needs its own explicit choice in a picker. `.optional()` here already means that third state is the default — build a UI around it accordingly, or don't build one at all.
+
 ```typescript
 {
   projectSettings: Record<string, unknown>;  // required -- the raw parsed project_settings.config JSON

@@ -72,6 +72,12 @@ The one thing that's different here versus 2/3: half the work happens client-sid
 - **The proxy route on your server should do exactly one thing:** receive the small settings JSON the browser already built, call `convert()` (or `/v1/convert` directly) with your API key, and return the response verbatim. It never touches file bytes, never receives a file upload — the request body it accepts is already the small JSON `@kuzuri.ao/b2o/engine`'s `prepareConvertRequest()` produces, not a multipart file upload. If you find yourself writing file-upload handling for this route, something's wrong — that's the exact round-trip this shape exists to avoid.
 - **Large files are the actual reason to pick this shape** — if the catalog you're integrating against runs to tens or 100+ MB per file, consider running `prepareConvertRequest()`/`applyConvertResponse()` inside a Web Worker rather than the main thread, so unzip/bbox work on a large mesh doesn't block the page. `@kuzuri.ao/b2o/engine` is confirmed Web Worker-safe (no DOM/`document`/`window` dependency) — see the companion doc's option 4 section for the full code shape.
 
+## Step 4c: Don't build a filament-brand picker unless you have a specific reason to
+
+Whatever option you're building, you'll run into `filamentComplianceMode` (`"generic" | "snapmaker" | omitted`) in the request schema. **The default (omitted) is almost certainly what this integration should use, with no UI control for it at all.** This field exists for one narrow purpose — relabeling filament identity because a marketplace (Snapmaker Space is the actual named case) requires a declared Generic-or-Snapmaker brand on upload, not the source's real one. If what you're building lets a visitor download a file to print at home, or feeds a catalog/publish pipeline, that scenario doesn't apply — the source project's own real filament identity (the creator's actual tuned colors/brands) is what almost everyone converting actually wants.
+
+Concretely: don't read `"generic" | "snapmaker"` as "here are the two choices for this field" and build a two-option (or worse, three-option) picker around it. The third state — the source's real, untouched identity — is what omitting the field already gives you for free, and it should be the only behavior for most integrations, not one of several equally-weighted options in a dropdown. Only add a control for this at all if your own site *also* deals in the kind of redistribution that needs a declared brand identity — "the API supports it" is not that reason on its own.
+
 ## Step 5: Enter Plan Mode before implementing anything
 
 Once you've read the reference and investigated this codebase, stop and present a plan — don't start writing code yet.
@@ -81,6 +87,7 @@ Your plan should cover:
 - If option 1: exactly where the handoff will be wired in (which file, which handler), matching the reasoning above.
 - If option 2/3/4: what needs to happen first (the API key, org-tier promotion if needed) before the integration can be tested for real.
 - If option 4 specifically: confirm your proxy route's request/response shape matches Step 4b above (JSON in and out, never a file upload) before writing it.
+- Confirm you're not building a Generic/Snapmaker filament-brand picker without a specific reason to (Step 4c) — the default plan should omit `filamentComplianceMode` entirely, not expose it as a choice.
 - What you'll verify once it's implemented — at minimum, confirm the site's existing behavior (downloads, publish pipeline, whatever's relevant) is completely unaffected when the new behavior isn't triggered, and works as expected when it is.
 
 Get the developer's explicit approval before implementing. This is a real architectural decision — how much backend work, what ongoing dependency on bambu2orca's API, whether an API key needs provisioning — that only they can make for their own site.
