@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { B2oApiError } from "../convertClient.js";
 import { createLogger } from "../logger.js";
 import type { ConvertOptions } from "./convert.js";
-import { computeOutputPath, createWatchState, isPermanentFailure, matchWarningLine, payloadFilePath, shouldSkipExisting, watchPollOnce } from "./convert.js";
+import { cleanWarnings, computeOutputPath, createWatchState, isPermanentFailure, matchWarningLine, payloadFilePath, shouldSkipExisting, watchPollOnce } from "./convert.js";
 
 describe("computeOutputPath", () => {
   it("appends the default _U1 suffix, alongside the input by default", () => {
@@ -203,5 +203,19 @@ describe("watchPollOnce", () => {
     expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
     await watchPollOnce(tempDir, options, state); // stable again -- reprocessed
     expect(consoleErrorSpy).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe("cleanWarnings", () => {
+  it("strips the WARN prefix and trailing period, keeping the actual message", () => {
+    expect(cleanWarnings(['  WARN: profile "x" was retired; converted with "y" instead.'])).toEqual(['profile "x" was retired; converted with "y" instead']);
+  });
+
+  it("drops routine bookkeeping lines the web UI also hides", () => {
+    expect(cleanWarnings(["  SKIP filament_colour: list length mismatch (template=1, bambu=2)", "  NOTE foo: left unchanged.", "   "])).toEqual([]);
+  });
+
+  it("removes internal file names from the message", () => {
+    expect(cleanWarnings(["WARN: object 3 has no bounding box in model_settings.config."])).toEqual(["object 3 has no bounding box"]);
   });
 });

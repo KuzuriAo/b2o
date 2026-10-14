@@ -12,6 +12,8 @@ import { computeFingerprint, loadStateFile, saveStateFile, type StateFile } from
 export interface ConvertOptions {
   profile?: string;
   filamentCompliance?: "generic" | "snapmaker";
+  /** --high-flow: all four toolheads have the Liber High Flow Hotend. */
+  highFlow?: boolean;
   outDir?: string;
   archiveDir?: string;
   suffix: string;
@@ -63,6 +65,7 @@ function summarizePayload(request: ConvertRequest): string {
     `    objects: ${request.objects.length} (each carries only a bounding box or fallback translation, never mesh vertices)`,
     `    total bytes of mesh geometry in this payload: 0`,
     ...(request.filamentComplianceMode ? [`    filamentComplianceMode: ${request.filamentComplianceMode}`] : []),
+    ...(request.highFlowHotends ? [`    highFlowHotends: true`] : []),
   ].join("\n");
 }
 
@@ -126,6 +129,46 @@ function logComplianceFallback(response: ConvertResponse, logger: Logger): void 
 }
 
 /**
+ * Same cleanup the web UI applies before showing warnings (apps/web's
+ * sanitizeWarnings): drop routine bookkeeping lines, strip the internal
+ * "WARN" prefix and internal file names. Kept in step with it so the CLI
+ * never shows less than the web UI does.
+ */
+export function cleanWarnings(warnings: readonly string[]): string[] {
+  return warnings
+    .map((w) => w.trim())
+    .filter((w) => {
+      if (!w) return false;
+      if (w.includes("SKIP filament_colour: list length mismatch")) return false;
+      if (w.includes("left unchanged")) return false;
+      if (w.includes("ignored") && w.includes("trailing non-JSON")) return false;
+      return true;
+    })
+    .map((w) =>
+      w
+        .replace(/^WARN:\s*/i, "")
+        .replace(/^WARN\s+/i, "")
+        .replace(/\s+in\s+model_settings\.config\.?/i, "")
+        .replace(/\s+in\s+3D\/3dmodel\.model\.?/i, "")
+        .replace(/\s+in\s+[A-Za-z0-9_./-]+\.(config|model|xml)\.?/i, "")
+        .replace(/\.$/, ""),
+    );
+}
+
+/**
+ * Warnings from reading the file locally plus the ones the server returns
+ * (overlapping objects after bed fitting, a retired --profile id that was
+ * converted with its successor, a layer height kept because no exact tier
+ * exists, ...). Always shown, not just in --verbose: these are exactly
+ * what the web UI shows, and the CLI used to drop them entirely.
+ */
+function logWarnings(localWarnings: readonly string[], response: ConvertResponse, logger: Logger): void {
+  for (const w of cleanWarnings([...localWarnings, ...(response.warnings ?? [])])) {
+    logger.log(`    warning: ${w}`);
+  }
+}
+
+/**
  * Where the exact request JSON gets written when --dry-run/--verbose ask
  * for it -- a real settings file easily has several hundred keys, too
  * many to usefully print inline on every run. Writing it to a file
@@ -184,6 +227,7 @@ async function convertOne(
     ...parsed.request,
     ...(options.profile ? { profileId: options.profile } : {}),
     ...(options.filamentCompliance ? { filamentComplianceMode: options.filamentCompliance } : {}),
+    ...(options.highFlow ? { highFlowHotends: true } : {}),
   };
   const outPath = computeOutputPath(entryName, defaultDir, options.suffix, options.outDir);
   const { logger } = options;
@@ -230,6 +274,7 @@ async function convertOne(
   }
   logActualMatch(response, options.verbose, logger);
   logComplianceFallback(response, logger);
+  logWarnings(parsed.warnings, response, logger);
   const outBytes = applyConvertResponse(parsed, response);
   writeFileSync(outPath, outBytes);
   logger.log(`${entryName} -> ${outPath}`);

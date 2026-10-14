@@ -21,7 +21,10 @@ export async function runProfiles(diameter: string | undefined, baseUrl: string)
     p.id,
     p.displayName,
     `${p.nozzleDiameter}mm`,
-    p.tierName + (p.autoSelectable ? "" : " (manual-select only)"),
+    p.tierName + (p.autoSelectable ? "" : " (manual-select only)") + (p.highFlowSpeeds ? " (high-flow speeds)" : ""),
   ]);
   console.log(formatTable(rows));
+  if (profiles.some((p) => p.highFlowSpeeds)) {
+    console.log('\n"high-flow speeds": has Snapmaker\'s high-flow tuning, used with convert --high-flow (Liber High Flow Hotend on all four toolheads).');
+  }
 }

@@ -71,6 +71,20 @@ export const ConvertRequestSchema = z.object({
    */
   filamentComplianceMode: z.enum(["generic", "snapmaker"]).optional(),
   /**
+   * All four toolheads have the Snapmaker × Phaetus Liber™ High Flow Hotend
+   * for U1. When the target profile's nozzle supports it (today only
+   * 0.4mm), the converted project is set up for high-flow: every toolhead
+   * marked high_flow, and on a tier with its own high-flow tuning (today
+   * only 0.20mm Standard) Snapmaker's high-flow speeds. A tier without its
+   * own high-flow tuning keeps its normal speeds. On a nozzle with no
+   * high-flow option it's ignored, with a note in `warnings`. Omitted or
+   * false (the default) sets the project up for standard hotends.
+   * Mixed setups should leave it off: process speeds apply to the whole
+   * print, so Snorca itself keeps standard speeds unless every toolhead is
+   * high-flow.
+   */
+  highFlowHotends: z.boolean().optional(),
+  /**
    * Opaque partner-site identifier for the handoff-import flow (see
    * docs/partner-handoff-integration-guide.md) -- lets the site owner see
    * which creator sites are actually driving conversions. Purely a
@@ -191,6 +205,10 @@ export const ProfileSummarySchema = z.object({
    * than a fixed tie-break.
    */
   tierName: z.string(),
+  /** This profile's nozzle supports the Liber High Flow Hotend (today only 0.4mm). Optional for older servers; treat absent as false. */
+  highFlowSupported: z.boolean().optional(),
+  /** This tier has its own high-flow tuning (today only 0.20mm Standard, 0.4mm), used when `highFlowHotends` is on. Optional; treat absent as false. */
+  highFlowSpeeds: z.boolean().optional(),
 });
 export type ProfileSummary = z.infer<typeof ProfileSummarySchema>;
 

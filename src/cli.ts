@@ -113,6 +113,7 @@ Options:
 ${formatOptions([
   ["--profile <id>", 'Force a specific profile instead of auto-detecting (run "b2o profiles" to find a valid id)'],
   ["--filament-compliance <mode>", '"generic" or "snapmaker" -- relabel filament identity for marketplace-compliance uploads (e.g. Snapmaker Space, space.snapmaker.com). Identity only: never changes temps, retraction, flow, or other tuned physical properties. Omit to keep the source file\'s original filament brand/preset names untouched.'],
+  ["--high-flow", "All four toolheads have the Snapmaker × Phaetus Liber™ High Flow Hotend for U1 (shop.snapmaker.com/products/liber-high-flow-hotend). Sets every toolhead to high-flow, and uses Snapmaker's faster high-flow speeds on tiers that have them (today only 0.20mm Standard, 0.4mm nozzle). A standard hotend can't keep up with those speeds. If you don't know what this is, leave it off. Mixed setups: leave it off. Ignored, with a note, on nozzle sizes with no high-flow option (only 0.4mm has one)"],
   ["--out-dir <dir>", "Write outputs to this directory instead of alongside each input. Must already exist -- unlike --archive-dir, it's not created automatically"],
   ["--suffix <text>", 'Output filename suffix (default: "_U1"; pass "" to remove it -- refused if that would make the output path identical to the input file)'],
   ["--skip-existing", "Skip a file entirely (no network call) if its output already exists -- for resuming an interrupted batch. Off by default: a normal run always overwrites, same as re-running a build"],
@@ -252,6 +253,7 @@ async function main(): Promise<void> {
         options: {
           profile: { type: "string" },
           "filament-compliance": { type: "string" },
+          "high-flow": { type: "boolean", default: false },
           "out-dir": { type: "string" },
           suffix: { type: "string", default: "_U1" },
           "dry-run": { type: "boolean", default: false },
@@ -275,6 +277,7 @@ async function main(): Promise<void> {
       const convertOptions: ConvertOptions = {
         profile: values.profile,
         filamentCompliance,
+        highFlow: Boolean(values["high-flow"]),
         outDir: values["out-dir"],
         archiveDir: values["archive-dir"],
         suffix: values.suffix ?? "_U1",

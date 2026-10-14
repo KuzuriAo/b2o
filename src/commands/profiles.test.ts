@@ -55,6 +55,20 @@ describe("runProfiles", () => {
     expect(ids).toEqual(expected);
   });
 
+  it("marks tiers with high-flow speeds and explains the marker, only when one is present", async () => {
+    vi.mocked(listProfiles).mockResolvedValue({ profiles: [makeProfile({ id: "a", highFlowSupported: true, highFlowSpeeds: true }), makeProfile({ id: "b", highFlowSupported: true })] });
+    await runProfiles(undefined, "https://example.com");
+    const table = logSpy.mock.calls[0][0] as string;
+    expect(table.split("\n").find((l: string) => l.startsWith("a"))).toContain("(high-flow speeds)");
+    expect(table.split("\n").find((l: string) => l.startsWith("b"))).not.toContain("high-flow");
+    expect(logSpy.mock.calls[1][0]).toContain("--high-flow");
+
+    logSpy.mockClear();
+    vi.mocked(listProfiles).mockResolvedValue({ profiles: [makeProfile({ id: "c" })] });
+    await runProfiles(undefined, "https://example.com");
+    expect(logSpy).toHaveBeenCalledTimes(1);
+  });
+
   it("prints a helpful message instead of an empty table when there are no matches", async () => {
     vi.mocked(listProfiles).mockResolvedValue({ profiles: [] });
     await runProfiles("0.9", "http://localhost:8787");
