@@ -2,6 +2,12 @@
 
 Newest first. Changes that alter what a converted file contains are always listed first, under "Output-affecting".
 
+## 0.0.12 (2026-10-19)
+
+### Output-affecting
+
+- Converted files no longer carry per-object overrides with an empty (`nil`) entry, for example `inner_wall_speed` set to `50,nil`. Bambu writes those as one value per nozzle variant on printers such as the H2D, and Snorca 2.4.0 refused to open a file containing one ("Deserializing nil into a non-nullable object"). The first value is kept, since the U1 prints with one nozzle at a time; an override whose first value is empty is removed. Files converted before today that Snorca 2.4.0 would not open can be re-converted. The web app got the same fix when it was deployed.
+
 ## 0.0.11 (2026-10-14)
 
 ### Output-affecting

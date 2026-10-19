@@ -29,4 +29,32 @@ describe("adaptModelSettings", () => {
       '<metadata key="filament_volume_maps" value="a"/>\nkeep\n<metadata key="filament_volume_maps" value="b"/>\n';
     expect(adaptModelSettings(input)).toBe("keep\n");
   });
+
+  // Snorca 2.4.0 refuses a file whose per-object overrides carry a `nil`
+  // ("Deserializing nil into a non-nullable object"). Seen in N3D's Doduo.
+  describe("per-variant nil lists (e.g. dual-nozzle H2D overrides)", () => {
+    it("keeps the first value of an object override like 50,nil", () => {
+      const input = '   <metadata key="inner_wall_speed" value="50,nil"/>\n   <metadata key="top_surface_speed" value="50,nil"/>\n';
+      expect(adaptModelSettings(input)).toBe('   <metadata key="inner_wall_speed" value="50"/>\n   <metadata key="top_surface_speed" value="50"/>\n');
+    });
+
+    it("keeps a percentage or decimal first value", () => {
+      expect(adaptModelSettings('<metadata key="sparse_infill_speed" value="40%,nil"/>\n')).toBe('<metadata key="sparse_infill_speed" value="40%"/>\n');
+      expect(adaptModelSettings('<metadata key="x" value="0.2,nil,nil"/>')).toBe('<metadata key="x" value="0.2"/>');
+    });
+
+    it("drops the line when the first value is itself nil (no override)", () => {
+      const input = 'before\n   <metadata key="inner_wall_speed" value="nil,60"/>\n   <metadata key="a" value="nil"/>\nafter\n';
+      expect(adaptModelSettings(input)).toBe("before\nafter\n");
+    });
+
+    it("leaves lists without a nil, and free text that merely contains one, alone", () => {
+      const lists = '<metadata key="x" value="50,60"/>\n<metadata key="name" value="Gear, nil edition"/>\n<metadata key="name" value="nil,thing"/>\n';
+      expect(adaptModelSettings(lists)).toBe(lists);
+    });
+
+    it("preserves CRLF line endings on a collapsed line", () => {
+      expect(adaptModelSettings('<metadata key="x" value="50,nil"/>\r\nkeep\r\n')).toBe('<metadata key="x" value="50"/>\r\nkeep\r\n');
+    });
+  });
 });
